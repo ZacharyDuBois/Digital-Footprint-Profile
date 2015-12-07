@@ -1,0 +1,22 @@
+{
+  "email": {
+    "sendgrid": "apiKey",
+    "from": "email@domain.tld"
+  },
+  "twitter": {
+    "key": "key",
+    "secret": "secret"
+  },
+  "tumblr": {
+    "key": "key",
+    "secret": "secret"
+  },
+  "instagram": {
+    "key": "key",
+    "secret": "secret"
+  },
+  "facebook": {
+    "key": "key",
+    "secret": "secret"
+  }
+}

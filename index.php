@@ -21,11 +21,14 @@ define('COMPOSER', __DIR__ . '/vendor/autoload.php');
 ////////////////////
 // Pre-start      //
 ////////////////////
-require COMPOSER;
-require PROJECT . '/inc/dfpException.php';
-require PROJECT . '/inc/dataStore.php';
+require PROJECT . '/inc/load.php';
+use DFP\dfpException;
 
 
 ////////////////////
 // Run            //
 ////////////////////
+try {
+} catch (dfpException $e) {
+    echo $e->getMessage();
+}
