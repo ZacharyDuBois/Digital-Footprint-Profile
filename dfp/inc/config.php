@@ -37,7 +37,9 @@ class config {
             'facebook',
             'twitter',
             'instagram',
-            'tumblr'
+            'tumblr',
+            'email',
+            'server'
         );
 
         if (in_array($service, $services) && is_array($this->config[$service])) {
@@ -45,29 +47,6 @@ class config {
         }
 
         throw new dfpException("Unrecognized or non-existent service: " . $service);
-    }
-
-    /**
-     * Gets email information.
-     *
-     * Retrieves email information for Sendgrid's API.
-     *
-     * @param $item
-     * @return string
-     * @throws dfpException
-     */
-    public function getEmail($item) {
-        $items = array(
-            'api',
-            'fromName',
-            'fromAddr'
-        );
-
-        if (in_array($item, $items)) {
-            return $this->config['email'][$item];
-        }
-
-        throw new dfpException("Unrecognized or non-existent param: " . $item);
     }
 
 }
