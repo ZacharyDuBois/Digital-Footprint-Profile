@@ -79,6 +79,11 @@ class dataStore {
         throw new dfpException('Cannot read ' . $this->path);
     }
 
+    /**
+     * Get the appended file metadata.
+     *
+     * @return array|bool
+     */
     public function readMeta() {
         if ($this->canRead()) {
             $data = json_encode(file_get_contents($this->path), true);
@@ -89,6 +94,11 @@ class dataStore {
         return false;
     }
 
+    /**
+     * Set the file meta.
+     *
+     * @return array
+     */
     private function setMeta() {
         $meta = array(
             'version'   => VERSION,
