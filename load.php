@@ -21,6 +21,7 @@ define('PROJECT', __DIR__ . '/dfp');
 define('TEMPLATE', PROJECT . '/template');
 define('SESSIONPATH', DATADIR . '/sessions');
 define('COMPOSER', __DIR__ . '/vendor/autoload.php');
+define('COOKIENAME', 'DFPSESS');
 
 ////////////////////
 // Requires       //
