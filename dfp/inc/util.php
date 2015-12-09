@@ -16,8 +16,12 @@ class util {
      * @return string
      */
     public static function genSessionToken() {
-        $session = sha1(microtime(true) . '-' . rand(0, PHP_INT_MAX));
+        $key = null;
 
-        return $session;
+        while (file_exists(SESSIONPATH . '/' . $key . '.json') || $key === null) {
+            $key = sha1(microtime(true) . '-' . rand(0, PHP_INT_MAX));
+        }
+
+        return $key;
     }
 }
