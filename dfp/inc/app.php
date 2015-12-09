@@ -32,6 +32,8 @@ class app {
                 return 'index';
             case 'session':
                 return 'session';
+            case 'callback':
+                return 'callback';
             default:
                 header("HTTP/1.1 404 Not Found");
                 header("Location: " . $this->config->getBlock('server')['host'] . "/");
