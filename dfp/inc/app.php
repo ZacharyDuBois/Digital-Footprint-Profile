@@ -18,26 +18,10 @@ class app {
         $this->config = new config();
 
         define('DFPHOST', $this->config->getBlock('server')['host']);
+        define('DFPSECURE', $this->config->getBlock('server')['https']);
     }
 
     public function run() {
-
-    }
-
-    private static function getEndpoint() {
-        $uri = explode('/', filter_input(INPUT_SERVER, 'REQUEST_URI'));
-
-        switch ($uri[0]) {
-            case '':
-                return 'index';
-            case 'session':
-                return 'session';
-            case 'callback':
-                return 'callback';
-            default:
-                header("HTTP/1.1 404 Not Found");
-                header("Location: " . $this->config->getBlock('server')['host'] . "/");
-                return false;
-        }
+        require PROJECT . '/view/route.php';
     }
 }
