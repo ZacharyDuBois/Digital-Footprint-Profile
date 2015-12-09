@@ -14,6 +14,13 @@ include __DIR__ . '/load.php';
 
 $dataStore = new dataStore(CONFIGURATION);
 
+$https = readline("Use HTTPS [true/false]: ");
+if ($https == 'true') {
+    $https = 'https://';
+} else {
+    $https = 'http://';
+}
+
 $requiredParams = array(
     'facebook'  => array(
         'key'    => readline("Facebook Key: "),
@@ -37,7 +44,8 @@ $requiredParams = array(
         'fromAddr' => readline("From Address: ")
     ),
     'server'    => array(
-        'host' => readline("Server Name/Domain name: ")
+        'host'  => readline("Server Name/Domain name: "),
+        'https' => $https
     )
 );
 
