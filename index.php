@@ -12,12 +12,15 @@
 ////////////////////
 require __DIR__ . '/load.php';
 use DFP\dfpException;
+use DFP\app;
 
 
 ////////////////////
 // Run            //
 ////////////////////
 try {
+    $app = new app();
+    $app->run();
 } catch (dfpException $e) {
     echo $e->getMessage();
 }
