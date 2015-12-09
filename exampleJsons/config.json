@@ -1,12 +1,12 @@
 {
     "meta": {
         "version": "0.0.1",
-        "lastWrite": 1449506121
+        "lastWrite": 1449625690
     },
     "payload": {
         "facebook": {
-            "key": "TestFB",
-            "secret": "SecFB"
+            "key": "FBkey",
+            "secret": "FBSec"
         },
         "twitter": {
             "key": "TwitKey",
@@ -17,13 +17,16 @@
             "secret": "TumSec"
         },
         "instagram": {
-            "key": "InsKey",
-            "secret": "InsSec"
+            "key": "InstaKey",
+            "secret": "InstaSec"
         },
         "email": {
-            "api": "SendGrid",
-            "fromName": "Test Name",
-            "fromAddr": "me@whatever.tld"
+            "api": "API",
+            "fromName": "Name",
+            "fromAddr": "some@one.tld"
+        },
+        "server": {
+            "host": "dfp.domain.tld"
         }
     }
 }

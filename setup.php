@@ -35,6 +35,9 @@ $requiredParams = array(
         'api'      => readline("Sendgrid API Key: "),
         'fromName' => readline("From Name: "),
         'fromAddr' => readline("From Address: ")
+    ),
+    'server'    => array(
+        'host' => readline("Server Name/Domain name: ")
     )
 );
 
@@ -45,4 +48,4 @@ if ($dataStore->write($requiredParams)) {
 }
 
 // TODO: Remove before release.
-unlink(__FILE__);
+//unlink(__FILE__);
