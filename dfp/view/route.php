@@ -10,6 +10,9 @@
 $uri = explode('/', filter_input(INPUT_SERVER, 'REQUEST_URI'));
 switch ($uri[0]) {
     case '':
+    case 'index':
+        require_once PROJECT . '/view/index/director.php';
+        break;
     case 'session':
     case 'privacy':
     case 'about':
