@@ -26,6 +26,11 @@ define('COOKIENAME', 'DFPSESS');
 ////////////////////
 // Requires       //
 ////////////////////
-require COMPOSER;
-require PROJECT . '/inc/dfpException.php';
-require PROJECT . '/inc/dataStore.php';
+require_once COMPOSER;
+require_once PROJECT . '/inc/dfpException.php';
+require_once PROJECT . '/inc/dataStore.php';
+require_once PROJECT . '/inc/app.php';
+require_once PROJECT . '/inc/config.php';
+require_once PROJECT . '/inc/session.php';
+require_once PROJECT . '/inc/util.php';
+require_once PROJECT . '/inc/view.php';
