@@ -19,6 +19,6 @@ switch ($uri[0]) {
         require_once PROJECT . '/view/' . $uri[0] . '/director.php';
         break;
     default:
-        header("Location: " . DFPSECURE . DFPHOST . '/');
+        \DFP\util::goHome();
         break;
 }
