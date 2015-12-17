@@ -36,10 +36,6 @@ class util {
         return DFPSECURE . DFPHOST;
     }
 
-    /**
-     * Get nav array
-     *
-     */
     public static function nav($active = null) {
         $index = '';
         $about = '';
@@ -111,8 +107,9 @@ class util {
             'js'  => util::getJS(),
             'home' => util::home(),
             'copyright' => '&copy; Zachary James DuBois, 2015. Open source under the MIT license.',
-            'primaryColor' => 'black',
-            'secondaryColor' => 'cyan'
+            'primaryColor' => 'green',
+            'secondaryColor' => 'yellow',
+            'version' => VERSION
         );
 
         return $extra;
