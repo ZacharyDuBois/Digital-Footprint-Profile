@@ -76,8 +76,7 @@ class view {
      */
     public function view($view) {
         if (is_string($view) && file_exists(TEMPLATE . '/' . $view . '.mustache')) {
-            $this->view = $view;
-            $this->mustache->loadTemplate($view);
+            $this->view = $this->mustache->loadTemplate($view);
 
             return true;
         }
@@ -94,7 +93,7 @@ class view {
      */
     public function render() {
         if (isset($this->payload) && isset($this->view)) {
-            return $this->mustache->render($this->payload);
+            return $this->view->render($this->payload);
         }
 
         throw new dfpException("view->render has not been setup correctly");
