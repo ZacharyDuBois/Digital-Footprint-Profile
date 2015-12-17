@@ -8,7 +8,8 @@
  */
 
 $uri = explode('/', filter_input(INPUT_SERVER, 'REQUEST_URI'));
-switch ($uri[0]) {
+
+switch ($uri[1]) {
     case '':
     case 'index':
         require_once PROJECT . '/view/index/director.php';

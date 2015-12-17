@@ -9,8 +9,8 @@
 
 $uri = explode('/', filter_input(INPUT_SERVER, 'REQUEST_URI'));
 // Make sure there are no trailing bits.
-if (!isset($uri[1]) || !count($uri) >= 1) {
+if (!isset($uri[2]) && count($uri) === 2) {
     require_once PROJECT . '/view/index/main.php';
 } else {
-    \DFP\util::home();
+   \DFP\util::goHome();
 }
