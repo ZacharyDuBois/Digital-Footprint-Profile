@@ -26,16 +26,36 @@ class util {
         return $key;
     }
 
+    /**
+     * 302 The user to home.
+     *
+     * @return bool
+     */
     public static function goHome() {
         header("Location: " . DFPSECURE . DFPHOST);
 
         return true;
     }
 
+    /**
+     * Return the home path.
+     *
+     * @return string
+     */
     public static function home() {
         return DFPSECURE . DFPHOST;
     }
 
+    /**
+     * Generates the nav menu array
+     *
+     * Creates the nav menu array for Mustache templates.
+     * TODO: Simplify
+     *
+     * @param string|null $active
+     * @return array
+     * @throws dfpException
+     */
     public static function nav($active = null) {
         $index = '';
         $about = '';
@@ -80,6 +100,14 @@ class util {
         return $nav;
     }
 
+    /**
+     * Generates CSS array
+     *
+     * Generates the CSS array for Mustache templates.
+     * TODO: Simplify
+     *
+     * @return array
+     */
     public static function getCSS() {
         $home = util::home() . '/dfp/public/css';
         $css = array(
@@ -90,6 +118,14 @@ class util {
         return $css;
     }
 
+    /**
+     * Generates JS array
+     *
+     * Generates JS array for Mustache templates.
+     * TODO: Simplify
+     *
+     * @return array
+     */
     public static function getJS() {
         $home = util::home() . '/dfp/public/js';
         $js = array(
@@ -100,6 +136,17 @@ class util {
         return $js;
     }
 
+    /**
+     * Generates array of misc Mustache vars.
+     *
+     * Generates/constructs array for Mustache to use as vars.
+     * TODO: Simplify
+     * TODO: Allow configuration.
+     *
+     * @param string|null $active
+     * @return array
+     * @throws dfpException
+     */
     public static function getExtra($active = null) {
         $extra = array(
             'nav' => util::nav($active),
