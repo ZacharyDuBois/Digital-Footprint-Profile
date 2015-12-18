@@ -44,8 +44,9 @@ $requiredParams = array(
         'fromAddr' => readline("From Address: ")
     ),
     'server'    => array(
-        'host'  => readline("Server Name/Domain name: "),
-        'https' => $https
+        'host'  => readline("Server Name/Domain Name: "),
+        'https' => $https,
+        'path'  => readline("Installation Path:") // TODO
     )
 );
 
@@ -55,5 +56,13 @@ if ($dataStore->write($requiredParams)) {
     echo("Error saving configuration.");
 }
 
-// TODO: Remove before release.
+// Validate
+$config = new config();
+
+if ($config->check()) {
+    echo("Something wasn't set correctly. Please start over.");
+    unlink(CONFIGURATION);
+} else {
+    // TODO: Remove before release.
 //unlink(__FILE__);
+}

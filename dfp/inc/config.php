@@ -49,4 +49,50 @@ class config {
         throw new dfpException("Unrecognized or non-existent service: " . $service);
     }
 
+    /**
+     * Checks if config is set.
+     *
+     * @return bool
+     */
+    public function check() {
+        $networks = array(
+            'facebook',
+            'twitter',
+            'tumblr',
+            'instagram'
+        );
+
+        $email = array(
+            'api',
+            'fromName',
+            'fromAddr'
+        );
+
+        $server = array(
+            'host',
+            'https',
+            'path'
+        );
+
+        foreach ($networks as $param) {
+            if (!isset($this->config[$param]['key']) && !isset($this->config[$param]['secret'])) {
+                return false;
+            }
+        }
+
+        foreach ($email as $param) {
+            if (!isset($this->config['email'][$param])) {
+                return false;
+            }
+        }
+
+        foreach ($server as $param) {
+            if (!isset($this->config['server'][$param])) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
 }
