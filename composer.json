@@ -4,8 +4,6 @@
         "tumblr/tumblr": "^0.2.0",
         "abraham/twitteroauth": "^0.6.2",
         "facebook/php-sdk-v4": "^5.1",
-        "sendgrid/sendgrid": "~4.0",
-        "phpmailer/phpmailer": "~5.2",
-        "pacely/mailchimp-apiv3": "dev-master"
+        "sendgrid/sendgrid": "~4.0"
     }
 }
