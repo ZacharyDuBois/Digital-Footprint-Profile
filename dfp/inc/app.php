@@ -15,7 +15,8 @@ class app {
         $config;
 
     public function __construct() {
-        $this->config = new config();
+        global $config;
+        $config = new config();
 
         define('DFPHOST', $this->config->getBlock('server')['host']);
         define('DFPSECURE', $this->config->getBlock('server')['https']);

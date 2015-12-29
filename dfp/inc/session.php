@@ -82,7 +82,7 @@ class session {
      *
      * @return bool
      */
-    public function endSession() {
+    static public function endSession() {
         setcookie(COOKIENAME, '', time() - 1, '/', DFPHOST);
 
         return true;
@@ -115,6 +115,7 @@ class session {
      */
     public function save() {
         $this->dataStore->write($this->sessNew);
+        $this->sessData = $this->sessNew;
 
         return true;
     }

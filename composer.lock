@@ -292,16 +292,16 @@
         },
         {
             "name": "sendgrid/sendgrid",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sendgrid/sendgrid-php.git",
-                "reference": "6f46520a1ecbd5e81562d67dadb75741e50e408b"
+                "reference": "ebf68af9d4158450b6d673bf6d31ff5297057882"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/6f46520a1ecbd5e81562d67dadb75741e50e408b",
-                "reference": "6f46520a1ecbd5e81562d67dadb75741e50e408b",
+                "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/ebf68af9d4158450b6d673bf6d31ff5297057882",
+                "reference": "ebf68af9d4158450b6d673bf6d31ff5297057882",
                 "shasum": ""
             },
             "require": {
@@ -335,7 +335,7 @@
                 "send",
                 "sendgrid"
             ],
-            "time": "2015-12-04 05:08:07"
+            "time": "2015-12-15 17:04:40"
         },
         {
             "name": "sendgrid/smtpapi",
@@ -387,7 +387,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.0",
+            "version": "v2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",

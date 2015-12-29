@@ -9,7 +9,7 @@
       "secret": "FBSec"
     },
     "twitter": {
-      "key": "TwitKey",
+      "consumer": "TwitKey",
       "secret": "TwitSec"
     },
     "tumblr": {
