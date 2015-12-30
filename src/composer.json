@@ -1,4 +1,7 @@
 {
+    "config": {
+        "vendor-dir": "dfp/vendor"
+    },
     "require": {
         "mustache/mustache": "~2.5",
         "tumblr/tumblr": "^0.2.0",
