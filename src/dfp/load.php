@@ -9,4 +9,6 @@
 
 require COMPOSER;
 require APP . 'inc' . DS . 'Exception.php';
+require APP . 'functions' . DS . 'functions.php';
 require APP . 'view' . DS . 'View.php';
+require APP . 'controller' . DS . 'DataStore.php';
