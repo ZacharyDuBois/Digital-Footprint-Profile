@@ -1,6 +1,6 @@
 <?php
 /**
- * File: view.php
+ * File: View.php
  * User: zacharydubois
  * Date: 2015-12-30
  * Time: 16:05
@@ -10,10 +10,10 @@
 namespace dfp;
 
 /**
- * Class view
+ * Class View
  * @package dfp
  */
-class view {
+class View {
     private
         $mustache,
         $tpl,

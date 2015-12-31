@@ -9,3 +9,4 @@
 
 require COMPOSER;
 require APP . 'inc' . DS . 'Exception.php';
+require APP . 'view' . DS . 'View.php';

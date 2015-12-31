@@ -42,14 +42,14 @@ if (!file_exists(CONFIGURATION)) {
  * Load the app.
  */
 require APP . 'load.php';
-require APP . 'controller' . DS . 'run.php';
-use \dfp\run;
+require APP . 'controller' . DS . 'Run.php';
+use \dfp\Run;
 use \dfp\Exception;
 
-
-$app = new run();
-
 try {
+    // Create run object.
+    $app = new Run();
+    // RUN IT!
     $app->run();
 } catch (Exception $e) {
     header("Content-Type: text/plain");

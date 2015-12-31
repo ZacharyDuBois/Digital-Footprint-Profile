@@ -1,6 +1,6 @@
 <?php
 /**
- * File: run.php
+ * File: Run.php
  * User: zacharydubois
  * Date: 2015-12-28
  * Time: 21:20
@@ -10,7 +10,7 @@
 namespace dfp;
 
 
-class run {
+class Run {
     public function __construct() {
 
     }
