@@ -41,7 +41,6 @@ if (!file_exists(CONFIGURATION)) {
 /*
  * Load the app.
  */
-require COMPOSER;
 require APP . 'load.php';
 require APP . 'controller' . DS . 'run.php';
 use \dfp\run;

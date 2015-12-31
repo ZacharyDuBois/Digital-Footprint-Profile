@@ -7,4 +7,5 @@
  * Project: Digital-Footprint-Profile
  */
 
+require COMPOSER;
 require APP . 'inc' . DS . 'Exception.php';
