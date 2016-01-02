@@ -52,7 +52,7 @@ class Config {
      * Merges new values with existing.
      *
      * @param array $payload
-     * @return bool
+     * @return true
      * @throws Exception
      */
     public function set(array $payload) {

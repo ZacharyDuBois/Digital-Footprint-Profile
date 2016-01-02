@@ -26,6 +26,7 @@ class DataStore {
      *
      * Sets the the filename for editing.
      *
+     * @return true
      * @param string $file
      * @throws Exception
      */
@@ -33,11 +34,14 @@ class DataStore {
         if(!is_string($file)) {
             throw new Exception("setFile did not receive string.");
         }
-        $this->file = $file;
 
-        if (!file_exists($this->file) && !$this->canWrite()) {
+        if (!file_exists($file) && !$this->canWrite()) {
             throw new Exception("Could not create " . $file . " for writing.");
         }
+
+        $this->file = $file;
+
+        return true;
     }
 
     /**
@@ -100,7 +104,7 @@ class DataStore {
      *
      * Reads the prepended meta information on the file.
      *
-     * @return bool
+     * @return array|false
      */
     public function readMeta() {
         if ($this->canRead()) {

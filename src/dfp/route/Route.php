@@ -56,7 +56,7 @@ class Route {
      *
      * Guide the request down the right route.
      *
-     * @return string|bool
+     * @return string|false
      */
     public function guide() {
         $endpointArray = explode('/', $this->endpoint);
