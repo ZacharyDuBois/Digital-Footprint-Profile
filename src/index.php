@@ -15,5 +15,7 @@ define('COMPOSER', APP . 'vendor' . DS . 'autoload.php');
 define('STORAGE', APP . 'storage' . DS);
 define('CONFIGURATION', APP . 'config' . DS . 'config.json');
 define('THEME', APP . 'theme' . DS);
+define('DFP_SESSION_NAME', 'DFPSID');
+define('DFP_SESSION_LIFE', 1800);
 
 require APP . 'boot.php';

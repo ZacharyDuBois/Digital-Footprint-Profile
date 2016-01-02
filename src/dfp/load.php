@@ -14,3 +14,4 @@ require APP . 'inc' . DS . 'Utility.php';
 require APP . 'functions' . DS . 'functions.php';
 require APP . 'view' . DS . 'View.php';
 require APP . 'controller' . DS . 'DataStore.php';
+require APP . 'controller' . DS . 'Session.php';
