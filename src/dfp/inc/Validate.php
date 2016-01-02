@@ -29,4 +29,16 @@ class Validate {
         $pattern = '/^([[:xdigit:]]{40})$/';
             return preg_match($pattern, $sid);
     }
+
+    /**
+     * Email
+     *
+     * Validates an email address.
+     *
+     * @param string $email
+     * @return bool
+     */
+    public static function email($email) {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
 }
