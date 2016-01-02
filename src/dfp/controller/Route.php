@@ -65,6 +65,7 @@ class Route {
         switch ($endpointArray[0]) {
             // Basically returns top level pages.
             case '':
+                return 'index';
             case 'about':
             case 'privacy':
                 // Ensure there is no followi

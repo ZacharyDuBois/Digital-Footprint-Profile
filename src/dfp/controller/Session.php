@@ -126,6 +126,8 @@ class Session {
     /**
      * Checks Expiration.
      *
+     * Checks the expiration time in the session file.
+     *
      * @return bool
      */
     private function isExpired() {
