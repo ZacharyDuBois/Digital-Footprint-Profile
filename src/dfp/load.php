@@ -12,6 +12,7 @@ require APP . 'inc' . DS . 'Exception.php';
 require APP . 'inc' . DS . 'Validate.php';
 require APP . 'inc' . DS . 'Utility.php';
 require APP . 'functions' . DS . 'functions.php';
-require APP . 'view' . DS . 'View.php';
+require APP . 'controller' . DS . 'View.php';
 require APP . 'controller' . DS . 'DataStore.php';
 require APP . 'controller' . DS . 'Session.php';
+require APP . 'controller' . DS . 'Route.php';

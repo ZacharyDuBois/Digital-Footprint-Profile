@@ -164,7 +164,7 @@ class Session {
         }
 
         define('DFP_SESSION_ENDED', true);
-        
+
         return true;
     }
 
