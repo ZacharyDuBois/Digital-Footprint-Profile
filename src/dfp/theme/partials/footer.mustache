@@ -1,0 +1,35 @@
+<footer class="page-footer {{primaryColor}} darken-2">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="{{secondaryColor}}-text">About</h5>
+                <p class="{{secondaryColor}}-text">This is a project to show you how well you maintain your social media presance as many places, including colleges and companies, look up and sift through your profiles. This service will help you
+                    clean up your profiles by showing posts that were flagged by the built in programmatic rules.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="{{secondaryColor}}-text">Navigation</h5>
+                <ul>
+                    {{#nav}}
+                        <li><a class="{{secondaryColor}}-text" href="{{url}}">{{title}}</a></li>
+                    {{/nav}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container {{secondaryColor}}-text text-darken-3">
+            {{{copyright}}}
+            <a class="{{secondaryColor}}-text text-darken-3 right" href="https://we.destroy.tokyo/DFP">Source Code v{{version}}</a>
+        </div>
+    </div>
+</footer>
+{{#js}}
+    <script type="text/javascript" src="{{url}}"></script>
+{{/js}}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".button-collapse").sideNav();
+    })
+</script>
+</body>
+</html>
