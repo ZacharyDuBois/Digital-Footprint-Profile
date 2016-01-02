@@ -81,6 +81,7 @@ class Route {
                         return 'session';
                     case 'authorize':
                     case 'list':
+                    case 'end':
                         if (count($endpointArray) === 2) {
                             return $endpointArray[1];
                         }
