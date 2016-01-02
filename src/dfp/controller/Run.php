@@ -15,7 +15,7 @@ class Run {
 
     }
 
-    public function run() {
+    public function letsGo() {
 
     }
 }

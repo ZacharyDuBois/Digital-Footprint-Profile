@@ -50,7 +50,7 @@ try {
     // Create run object.
     $app = new Run();
     // RUN IT!
-    $app->run();
+    $app->letsGo();
 } catch (Exception $e) {
     header("Content-Type: text/plain");
     echo $e;
