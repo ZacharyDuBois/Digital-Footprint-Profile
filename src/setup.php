@@ -180,5 +180,5 @@ p(false);
 p("Removing setup script for security...");
 unlink(__FILE__);
 p("Done.");
-p("Thanks for using Digital Footprint.");
+p("Thanks for using Digital Footprint Profile.");
 exit();

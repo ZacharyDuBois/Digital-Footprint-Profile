@@ -35,11 +35,17 @@ class DataStore {
             throw new Exception("setFile did not receive string.");
         }
 
-        if (!file_exists($file) && !is_writeable(dirname($file))) {
-            throw new Exception("Could not create " . $file . " for writing.");
-        }
-
         $this->file = $file;
+
+        if (!file_exists($file) && !$this->canWrite()) {
+            $c = $this->canWrite();
+            if ($c) {
+                $c = 'true';
+            } else {
+                $c = 'false';
+            }
+            throw new Exception($c . "Could not create " . $file . " for writing.");
+        }
 
         return true;
     }
@@ -52,13 +58,11 @@ class DataStore {
      * @return bool
      */
     private function canWrite() {
-        if (is_writeable(dirname($this->file))) {
-            if (is_writeable($this->file)) {
-                return true;
-            }
+        if (file_exists($this->file)) {
+            return is_writable($this->file);
+        } else {
+            return is_writable(dirname($this->file));
         }
-
-        return false;
     }
 
     /**
