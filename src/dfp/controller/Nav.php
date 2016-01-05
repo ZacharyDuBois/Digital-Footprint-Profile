@@ -76,7 +76,7 @@ class Nav {
                 'location' => Utility::buildFullLink($this->config, true, $k)
             );
         }
-        
+
         return $navArray;
     }
 }

@@ -120,7 +120,7 @@ class View {
      * @return string
      */
     public function render() {
-        if (!isset($this->content) || !isset($this->tpl) || !isset($this->nav)) {
+        if ($this->tpl !== 'email' && (!isset($this->content) || !isset($this->tpl) || !isset($this->nav))) {
             throw new Exception("View cannot render as required content is not set.");
         }
 
