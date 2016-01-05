@@ -71,7 +71,7 @@ class Nav {
             }
 
             $navArray[] = array(
-                'name'     => $vm,
+                'name'     => $v,
                 'active'   => $active,
                 'location' => Utility::buildFullLink($this->config, true, $k)
             );
