@@ -93,6 +93,8 @@ class View {
         foreach ($css as $file) {
             $assets['css'][] = array('url' => Utility::buildFullLink($this->config, true, PUBLIC_URI . 'css/' . basename($file)));
         }
+        $assets['css'][] = array('url' => 'https://fonts.googleapis.com/icon?family=Material+Icons');
+
         foreach ($js as $file) {
             $assets['js'][] = array('url' => Utility::buildFullLink($this->config, true, PUBLIC_URI . 'js/' . basename($file)));
         }
