@@ -76,7 +76,7 @@ class Route {
                     return $endpointArray[0];
                 }
 
-                return false;
+                return 404;
 
             // Session routing is a bit more complex.
             case 'session':
@@ -91,7 +91,7 @@ class Route {
                             return $endpointArray[1];
                         }
 
-                        return false;
+                        return 404;
 
                     case 'callback':
                         switch ($endpointArray[2]) {
@@ -103,18 +103,18 @@ class Route {
                                     return $endpointArray[2];
                                 }
 
-                                return false;
+                                return 404;
 
                             default:
-                                return false;
+                                return 404;
                         }
 
                     default:
-                        return false;
+                        return 404;
                 }
 
             default:
-                return false;
+                return 404;
         }
     }
 }

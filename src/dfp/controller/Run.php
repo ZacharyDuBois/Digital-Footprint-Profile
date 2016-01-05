@@ -30,19 +30,10 @@ class Run {
         $route = new Route();
         $request = $route->guide();
 
-        switch ($request) {
-            case false:
-                header("HTTP/1.1 404 Not Found");
-                $view = new View();
-                $view->tpl('404');
-                echo $view->render();
-                break;
-            default:
-                $model = APP . 'models' . DS . basename($request) . '.php';
-                if (file_exists($model)) {
-                    require $model;
-                    break;
-                }
+
+        $model = APP . 'models' . DS . basename($request) . '.php';
+        if (file_exists($model)) {
+            require $model;
         }
 
         return true;
