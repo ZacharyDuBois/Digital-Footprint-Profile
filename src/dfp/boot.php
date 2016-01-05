@@ -11,7 +11,7 @@ require APP . 'inc' . DS . 'checks.php';
 
 if (!phpVersionCheck()) {
     header("Content-Type: text/plain");
-    echo "You need at least PHP 5.6 to run this.";
+    echo "You need at least PHP 5.5 to run this.";
     die();
 }
 

@@ -35,7 +35,7 @@ class DataStore {
             throw new Exception("setFile did not receive string.");
         }
 
-        if (!file_exists($file) && !$this->canWrite()) {
+        if (!file_exists($file) && !is_writeable(dirname($file))) {
             throw new Exception("Could not create " . $file . " for writing.");
         }
 

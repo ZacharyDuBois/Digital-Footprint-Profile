@@ -37,7 +37,7 @@ require APP . 'inc' . DS . 'checks.php';
 if (phpVersionCheck()) {
     p("PHP " . PHP_VERSION . " meets requirement...");
 } else {
-    p("You need at least PHP 5.6 to run this.");
+    p("You need at least PHP 5.5 to run this.");
     p("Exiting...");
     exit();
 }

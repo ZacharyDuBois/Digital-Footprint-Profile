@@ -14,7 +14,7 @@
  * @return bool
  */
 function phpVersionCheck() {
-    return version_compare(PHP_VERSION, '5.6.0', '>=');
+    return version_compare(PHP_VERSION, '5.5.0', '>=');
 }
 
 /**
