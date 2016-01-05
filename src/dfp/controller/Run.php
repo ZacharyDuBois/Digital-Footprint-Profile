@@ -28,7 +28,6 @@ class Run {
      */
     public function letsGo() {
         $route = new Route();
-        //$config = new Config();
         $request = $route->guide();
         $view = new View();
 
@@ -49,7 +48,9 @@ class Run {
                 }
         }
 
-        echo $view->render();
+        if (!defined('REDIRECT') || !defined('CALLBACK')) {
+            echo $view->render();
+        }
 
         return true;
     }
