@@ -31,9 +31,6 @@ class Run {
         $request = $route->guide();
 
         switch ($request) {
-            case 'redirect':
-                // Make sure redirects pass through with no returned content.
-                return true;
             case false:
                 header("HTTP/1.1 404 Not Found");
                 $view = new View();
