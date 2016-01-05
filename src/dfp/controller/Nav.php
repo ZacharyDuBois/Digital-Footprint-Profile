@@ -61,6 +61,7 @@ class Nav {
         );
 
         $navArray = array();
+        $navArray['nav'] = array();
 
         foreach ($navItems as $k => $v) {
             if ($k === $this->active) {
@@ -70,10 +71,10 @@ class Nav {
                 $active = null;
             }
 
-            $navArray[] = array(
-                'name'     => $v,
+            $navArray['nav'][] = array(
+                'title'     => $v,
                 'active'   => $active,
-                'location' => Utility::buildFullLink($this->config, true, $k)
+                'url' => Utility::buildFullLink($this->config, true, $k)
             );
         }
 
