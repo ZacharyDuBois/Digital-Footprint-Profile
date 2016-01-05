@@ -23,7 +23,7 @@ $view->navArray($nav->navArray());
 // Tell view what template and content.
 $view->tpl('index');
 $view->content(array(
-    'title'       => 'Start',
+    'title'       => 'Welcome | Digital Footprint Profile',
     'sessionLink' => Utility::buildFullLink($config, true, 'session')
 ));
 
