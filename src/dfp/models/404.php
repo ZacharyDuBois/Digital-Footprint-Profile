@@ -7,4 +7,23 @@
  * Project: Digital-Footprint-Profile
  */
 
+namespace dfp;
+
+// Create objects.
+$view = new View();
+$nav = new Nav();
+$config = new Config();
+
+// Tell view the nav array.
+$view->navArray($nav->navArray());
+
+// Tell view what template and content.
+$view->tpl('404');
+$view->content(array(
+    'title'       => '404 | Digital Footprint Profile',
+    'sessionLink' => Utility::buildFullLink($config, true, 'session')
+));
+
 header("HTTP/1.1 404 Not Found");
+
+echo $view->render();
