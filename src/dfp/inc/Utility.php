@@ -38,12 +38,25 @@ class Utility {
      * @param string $endpoint
      * @return string
      */
-    public static function buildFullLink(Config $config, $endpoint) {
+    public static function buildFullLink(Config $config, $relative = false, $endpoint = null) {
         $proto = $config->get('server', 'protocol');
         $host = $config->get('server', 'host');
         $base = $config->get('server', 'base');
 
-        $link = $proto . $host . '/' . $base . '/';
+        if ($relative === true) {
+            if ($base === false) {
+                $link = '/' . $endpoint;
+            } else {
+                $link = '/' . $base . '/' . $endpoint;
+            }
+        } else {
+            if ($base === false) {
+                $link = $proto . $host . '/' . $endpoint;
+            } else {
+                $link = $proto . $host . '/' . $base . '/' . $endpoint;
+            }
+        }
+
 
         return $link;
     }
@@ -57,7 +70,7 @@ class Utility {
      * @return bool
      */
     public static function goHome(Config $config) {
-        header("Location: " . static::buildFullLink($config, '/'));
+        header("Location: " . static::buildFullLink($config));
 
         return true;
     }
