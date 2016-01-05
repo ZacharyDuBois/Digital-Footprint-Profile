@@ -120,11 +120,15 @@ class View {
      * @return string
      */
     public function render() {
-        if ($this->tpl !== 'email' && (!isset($this->content) || !isset($this->tpl) || !isset($this->nav))) {
+        if ($this->tpl !== 'email' && isset($this->content) && isset($this->tpl) && isset($this->nav)) {
+            $content = array_merge($this->nav, array_merge($this->assetsArray(), $this->content));
+        } elseif ($this->tpl === 'email') {
+            $content = $this->content;
+        } else {
             throw new Exception("View cannot render as required content is not set.");
         }
 
-        $content = array_merge($this->nav, array_merge($this->assetsArray(), $this->content));
+
 
         return $this->mustache->render($this->tpl, $content);
     }
