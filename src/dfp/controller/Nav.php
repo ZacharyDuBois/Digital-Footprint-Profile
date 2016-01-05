@@ -19,8 +19,7 @@ namespace dfp;
 class Nav {
     private
         $active,
-        $items,
-        $base;
+        $config;
 
     /**
      * Nav constructor.
@@ -28,9 +27,7 @@ class Nav {
      * Grabs some basic configuration information.
      */
     public function __construct() {
-        $config = new Config();
-        $this->items = $config->get('nav');
-        $this->base = $config->get('server', 'base');
+        $this->config = new Config();
     }
 
     /**
@@ -55,22 +52,31 @@ class Nav {
      * @return array
      */
     public function navArray() {
+        $navItems = array(
+            'index'   => 'Home',
+            'session' => 'Start',
+            'about'   => 'About',
+            'terms'   => 'Terms',
+            'privacy' => 'Privacy'
+        );
+
         $navArray = array();
 
-        foreach($this->items as $item) {
-            if($item === $this->active) {
+        foreach ($navItems as $k => $v) {
+            if ($k === $this->active) {
+                // Class for active nav items.
                 $active = 'active';
             } else {
                 $active = null;
             }
 
             $navArray[] = array(
-                'name' => ucfirst($item),
-                'active' => $active,
-                'location' => $this->base . '/' . $item
+                'name'     => $vm,
+                'active'   => $active,
+                'location' => Utility::buildFullLink($this->config, true, $k)
             );
         }
-
+        
         return $navArray;
     }
 }
