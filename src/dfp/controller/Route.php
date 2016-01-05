@@ -19,7 +19,8 @@ namespace dfp;
 class Route {
     private
         $base,
-        $endpoint;
+        $endpoint,
+        $config;
 
     /**
      * Route constructor.
@@ -27,8 +28,8 @@ class Route {
      * Gets the base URL from the config and removes it to create a usable endpoint.
      */
     public function __construct() {
-        $config = new Config();
-        $this->base = $config->get('server', 'base');
+        $this->config = new Config();
+        $this->base = $this->config->get('server', 'base');
 
         if ($this->base !== false) {
             $this->endpoint = filter_input(INPUT_SERVER, 'REQUEST_URI');
@@ -60,6 +61,12 @@ class Route {
      */
     public function guide() {
         $endpointArray = explode('/', $this->endpoint);
+        if ($endpointArray[0] !== null) {
+            Utility::goHome($this->config);
+
+            return 'redirect';
+        }
+
         array_shift($endpointArray);
 
         switch ($endpointArray[0]) {
@@ -67,8 +74,9 @@ class Route {
             case '':
                 return 'index';
             case 'about':
+            case 'terms':
             case 'privacy':
-                // Ensure there is no followi
+                // Ensure there is no following
                 if (count($endpointArray) === 1) {
                     return $endpointArray[0];
                 }

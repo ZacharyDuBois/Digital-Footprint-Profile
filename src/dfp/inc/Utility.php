@@ -28,4 +28,37 @@ class Utility {
 
         return $key;
     }
+
+    /**
+     * Build Full Link
+     *
+     * Builds full link using protocol, host and base.
+     *
+     * @param Config $config
+     * @param string $endpoint
+     * @return string
+     */
+    public static function buildFullLink(Config $config, $endpoint) {
+        $proto = $config->get('server', 'protocol');
+        $host = $config->get('server', 'host');
+        $base = $config->get('server', 'base');
+
+        $link = $proto . $host . '/' . $base . '/';
+
+        return $link;
+    }
+
+    /**
+     * Brings User Home
+     *
+     * Sends location header to send user to root.
+     *
+     * @param Config $config
+     * @return bool
+     */
+    public static function goHome(Config $config) {
+        header("Location: " . static::buildFullLink($config, '/'));
+
+        return true;
+    }
 }
