@@ -9,8 +9,12 @@
 
 namespace dfp;
 
+
 /**
  * Class View
+ *
+ * Handles template rendering.
+ *
  * @package dfp
  */
 class View {
@@ -68,6 +72,32 @@ class View {
     }
 
     /**
+     * Generate Assets Array
+     *
+     * Creates an array of assets to be used.
+     *
+     * @return array
+     */
+    private function assets() {
+        $config = new Config();
+        $assets = array(
+            'css' => array(),
+            'js'  => array()
+        );
+        $css = glob(APP . 'public' . DS . '*.min.css');
+        $js = glob(APP . 'public' . DS . '*.min.js');
+
+        foreach ($css as $file) {
+            $assets['css'][] = array('url' => Utility::buildFullLink($config, true, PUBLIC_URI . 'css/' . basename($file)));
+        }
+        foreach ($js as $file) {
+            $assets['js'][] = array('url' => Utility::buildFullLink($config, true, PUBLIC_URI . 'js/' . basename($file)));
+        }
+
+        return $assets;
+    }
+
+    /**
      * Render
      *
      * Renders and returns the rendered template.
@@ -75,6 +105,12 @@ class View {
      * @return string
      */
     public function render() {
-        return $this->mustache->render($this->tpl, $this->content);
+        if (!isset($this->$content) || !isset($this->$tpl)) {
+            throw new Exception("View cannot render as required content is not set.");
+        }
+        
+        $content = array_merge($this->assets(), $this->$content);
+
+        return $this->mustache->render($this->tpl, $content);
     }
 }
