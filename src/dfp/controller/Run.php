@@ -12,6 +12,7 @@ namespace dfp;
 
 class Run {
     public function __construct() {
+        $route = new Route();
 
     }
 

@@ -30,7 +30,7 @@ class Route {
         $config = new Config();
         $this->base = $config->get('server', 'base');
 
-        if (!isset($this->base)) {
+        if ($this->base !== false) {
             $this->endpoint = filter_input(INPUT_SERVER, 'REQUEST_URI');
         } else {
             $this->endpoint = $this->removeBase();
