@@ -1,0 +1,41 @@
+{
+    "meta": {
+        "version": "0.0.1",
+        "lastWrite": 1451967497
+    },
+    "payload": {
+        "server": {
+            "protocol": "",
+            "domain": "",
+            "base": ""
+        },
+        "email": {
+            "gateway": "",
+            "sendgrid_key": "",
+            "host": "",
+            "port": "",
+            "user": "",
+            "password": "",
+            "secure": "",
+            "subject": "",
+            "from_address": "",
+            "from_name": ""
+        },
+        "twitter": {
+            "consumer": "",
+            "secret": ""
+        },
+        "facebook": {
+            "id": "",
+            "secret": ""
+        },
+        "tumblr": {
+            "consumer": "",
+            "secret": ""
+        },
+        "instagram": {
+            "id": "",
+            "secret": ""
+        }
+    }
+}
