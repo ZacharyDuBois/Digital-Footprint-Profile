@@ -34,16 +34,16 @@ class Config {
      * Retrieves configuration options from the configuration array.
      *
      * @param string $option
-     * @param string|null $param
+     * @param string $param
      * @return array|string|bool
      */
-    public function get($option, $param = null) {
-        if ((!isset($this->config[$option]) && $param === null) || (!isset($this->config[$option][$param]) && $param !== null)) {
+    public function get($option, $param) {
+        if (!isset($this->config[$option][$param]) || $this->config[$option][$param] === '') {
             // Make sure values actually exist.
             return false;
         }
 
-        return $this->config[$option];
+        return $this->config[$option][$param];
     }
 
     /**
