@@ -29,8 +29,6 @@ class Run {
     public function letsGo() {
         $route = new Route();
         $request = $route->guide();
-        $view = new View();
-
 
         switch ($request) {
             case 'redirect':
@@ -38,7 +36,9 @@ class Run {
                 return true;
             case false:
                 header("HTTP/1.1 404 Not Found");
+                $view = new View();
                 $view->tpl('404');
+                echo $view->render();
                 break;
             default:
                 $model = APP . 'models' . DS . basename($request) . '.php';
@@ -46,10 +46,6 @@ class Run {
                     require $model;
                     break;
                 }
-        }
-
-        if (!defined('REDIRECT') || !defined('CALLBACK')) {
-            echo $view->render();
         }
 
         return true;
