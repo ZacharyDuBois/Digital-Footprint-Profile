@@ -14,8 +14,8 @@ $view = new View();
 $nav = new Nav();
 $config = new Config();
 
-// Create nav.
-$nav->setActive('index');
+// Create nav (Index is empty).
+$nav->setActive('');
 
 // Tell view the nav array.
 $view->navArray($nav->navArray());

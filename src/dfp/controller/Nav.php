@@ -53,7 +53,7 @@ class Nav {
      */
     public function navArray() {
         $navItems = array(
-            'index'   => 'Home',
+            ''   => 'Home',
             'session' => 'Start',
             'about'   => 'About',
             'terms'   => 'Terms',
