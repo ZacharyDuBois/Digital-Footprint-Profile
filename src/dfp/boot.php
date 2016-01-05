@@ -7,35 +7,24 @@
  * Project: Digital-Footprint-Profile
  */
 
+require APP . 'inc' . DS . 'checks.php';
 
-/*
- * Check the PHP version and make sure it is the latest.
- */
-if (!version_compare(PHP_VERSION, '5.6.0', '>=')) {
+if (!phpVersionCheck()) {
     header("Content-Type: text/plain");
     echo "You need at least PHP 5.6 to run this.";
-
-    return false;
+    die();
 }
 
-/*
- * Check to make sure they installed the Composer dependencies.
- */
-if (!file_exists(COMPOSER)) {
+if (!composerCheck()) {
     header("Content-Type: text/plain");
     echo "You did not complete the installation process. Composer dependencies were not installed.";
-
-    return false;
+    die();
 }
 
-/*
- * Check to see if DFP has been configured.
- */
-if (!file_exists(CONFIGURATION)) {
+if (!configured()) {
     header("Content-Type: text/plain");
     echo "Digital Footprint Profile has not been configured yet. Please run the configuration script.";
-
-    return false;
+    die();
 }
 
 /*
