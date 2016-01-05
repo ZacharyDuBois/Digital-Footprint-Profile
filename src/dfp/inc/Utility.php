@@ -40,7 +40,7 @@ class Utility {
      */
     public static function buildFullLink(Config $config, $relative = false, $endpoint = null) {
         $proto = $config->get('server', 'protocol');
-        $host = $config->get('server', 'host');
+        $host = $config->get('server', 'domain');
         $base = $config->get('server', 'base');
 
         if ($relative === true) {
