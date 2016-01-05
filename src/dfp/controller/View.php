@@ -22,7 +22,8 @@ class View {
         $mustache,
         $tpl,
         $content,
-        $nav;
+        $nav,
+        $config;
 
     /**
      * view constructor.
@@ -34,6 +35,7 @@ class View {
             'loader'          => new \Mustache_Loader_FilesystemLoader(THEME),
             'partials_loader' => new \Mustache_Loader_FilesystemLoader(THEME . 'partials' . DS)
         ));
+        $this->config = new Config();
     }
 
     /**
@@ -80,19 +82,19 @@ class View {
      * @return array
      */
     private function assetsArray() {
-        $config = new Config();
+        $this->config = new Config();
         $assets = array(
             'css' => array(),
             'js'  => array()
         );
-        $css = glob(APP . 'public' . DS . '*.min.css');
-        $js = glob(APP . 'public' . DS . '*.min.js');
+        $css = glob(PATH . 'public' . DS . 'css' . DS . '*.min.css');
+        $js = glob(PATH . 'public' . DS . 'js' . DS . '*.min.js');
 
         foreach ($css as $file) {
-            $assets['css'][] = array('url' => Utility::buildFullLink($config, true, PUBLIC_URI . 'css/' . basename($file)));
+            $assets['css'][] = array('url' => Utility::buildFullLink($this->config, true, PUBLIC_URI . 'css/' . basename($file)));
         }
         foreach ($js as $file) {
-            $assets['js'][] = array('url' => Utility::buildFullLink($config, true, PUBLIC_URI . 'js/' . basename($file)));
+            $assets['js'][] = array('url' => Utility::buildFullLink($this->config, true, PUBLIC_URI . 'js/' . basename($file)));
         }
 
         return $assets;
@@ -120,21 +122,19 @@ class View {
      * @return string
      */
     public function render() {
-        $config = new Config();
-
         if ($this->tpl !== 'email' && isset($this->content) && isset($this->tpl) && isset($this->nav)) {
             $base = array(
-                'home'      => Utility::buildFullLink($config, true),
+                'home'      => Utility::buildFullLink($this->config, true),
                 'version'   => VERSION,
-                'copyright' => $config->get('custom', 'copyright')
+                'copyright' => $this->config->get('custom', 'copyright')
             );
 
             $content = array_merge($base, array_merge($this->nav, array_merge($this->assetsArray(), $this->content)));
         } elseif ($this->tpl === 'email') {
             $base = array(
-                'home'      => Utility::buildFullLink($config),
+                'home'      => Utility::buildFullLink($this->config),
                 'version'   => VERSION,
-                'copyright' => $config->get('custom', 'copyright')
+                'copyright' => $this->config->get('custom', 'copyright')
             );
 
             $content = array_merge($base, $this->content);
