@@ -120,14 +120,27 @@ class View {
      * @return string
      */
     public function render() {
+        $config = new Config();
+
         if ($this->tpl !== 'email' && isset($this->content) && isset($this->tpl) && isset($this->nav)) {
-            $content = array_merge($this->nav, array_merge($this->assetsArray(), $this->content));
+            $base = array(
+                'home'      => Utility::buildFullLink($config, true),
+                'version'   => VERSION,
+                'copyright' => $config->get('custom', 'copyright')
+            );
+
+            $content = array_merge($base, array_merge($this->nav, array_merge($this->assetsArray(), $this->content)));
         } elseif ($this->tpl === 'email') {
-            $content = $this->content;
+            $base = array(
+                'home'      => Utility::buildFullLink($config),
+                'version'   => VERSION,
+                'copyright' => $config->get('custom', 'copyright')
+            );
+
+            $content = array_merge($base, $this->content);
         } else {
             throw new Exception("View cannot render as required content is not set.");
         }
-
 
 
         return $this->mustache->render($this->tpl, $content);
