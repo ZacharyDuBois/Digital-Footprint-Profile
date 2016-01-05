@@ -61,7 +61,7 @@ class Route {
      */
     public function guide() {
         $endpointArray = explode('/', $this->endpoint);
-        if ($endpointArray[0] !== null) {
+        if ($endpointArray[0] !== null && $this->base === false) {
             Utility::goHome($this->config);
 
             return 'redirect';
