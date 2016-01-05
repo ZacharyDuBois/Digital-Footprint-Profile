@@ -31,7 +31,7 @@ class DataStore {
      * @throws Exception
      */
     public function setFile($file) {
-        if(!is_string($file)) {
+        if (!is_string($file)) {
             throw new Exception("setFile did not receive string.");
         }
 
@@ -89,10 +89,11 @@ class DataStore {
     public function read() {
         if ($this->canRead() && file_exists($this->file)) {
             $data = json_decode(file_get_contents($this->file), true);
+        }
 
+        if (isset($data) && $data !== false) {
             return $data['payload'];
-        } elseif($this->canRead() && !file_exists($this->file)) {
-            // Quick Fix. If file doesn't exist and a read is attempted, just return a blank array.
+        } elseif (!isset($data) || $data === false) {
             return array();
         }
 
