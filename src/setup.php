@@ -28,7 +28,7 @@ function r() {
     return readline("> ");
 }
 
-p("Welcome to Digital Footprint Profile configurator.");
+p("Welcome to Digital Footprint Profile " . VERSION . " configurator.");
 p("Made by Zachary J. DuBois - https://zacharydubois.me");
 p("Checking dependencies...");
 
@@ -101,22 +101,22 @@ p("Email Configuration");
 p("Email gateway [sendgrid || smtp]:");
 $cfgArray['email']['gateway'] = r();
 
-if($cfgArray['email']['gateway'] === 'sendgrid') {
+if ($cfgArray['email']['gateway'] === 'sendgrid') {
     p("Sendgrid API Key:");
     $cfgArray['email']['sendgrid_key'] = r();
 } elseif ($cfgArray['email']['gateway'] === 'smtp') {
     p("SMTP Host:[smtp.domin.tld]:");
     $cfgArray['email']['host'] = r();
-    
+
     p("SMTP Port:");
     $cfgArray['email']['port'] = r();
-    
+
     p("SMTP User:");
     $cfgArray['email']['user'] = r();
-    
+
     p("SMTP Password:");
     $cfgArray['email']['password'] = r();
-    
+
     p("SMTP Security [tls || ssl]:");
     $cfgArray['email']['secure'] = r();
 } else {
@@ -160,6 +160,12 @@ $cfgArray['instagram']['id'] = r();
 
 p("Instagram client secret:");
 $cfgArray['instagram']['secret'] = r();
+
+p(false);
+p("Custom Settings");
+
+p("Copyright text:");
+$cfgArray['custom']['copyright'] = r();
 
 p("User Input Complete.");
 p(false);
