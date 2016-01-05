@@ -21,7 +21,8 @@ class View {
     private
         $mustache,
         $tpl,
-        $content;
+        $content,
+        $nav;
 
     /**
      * view constructor.
@@ -41,7 +42,7 @@ class View {
      * Sets the template file for mustache to use.
      *
      * @param string $tpl
-     * @return bool
+     * @return true
      * @throws Exception
      */
     public function tpl($tpl) {
@@ -63,7 +64,7 @@ class View {
      * Sets the content to be used for generating the template.
      *
      * @param array $payload
-     * @return bool
+     * @return true
      */
     public function content(array $payload) {
         $this->content = $payload;
@@ -78,7 +79,7 @@ class View {
      *
      * @return array
      */
-    private function assets() {
+    private function assetsArray() {
         $config = new Config();
         $assets = array(
             'css' => array(),
@@ -98,6 +99,20 @@ class View {
     }
 
     /**
+     * Sets Nav Array
+     *
+     * Sets the nav array to be used when rendering the template.
+     *
+     * @param array $navArray
+     * @return true
+     */
+    public function navArray(array $navArray) {
+        $this->nav = $navArray;
+
+        return true;
+    }
+
+    /**
      * Render
      *
      * Renders and returns the rendered template.
@@ -105,11 +120,11 @@ class View {
      * @return string
      */
     public function render() {
-        if (!isset($this->$content) || !isset($this->$tpl)) {
+        if (!isset($this->content) || !isset($this->tpl) || !isset($this->nav)) {
             throw new Exception("View cannot render as required content is not set.");
         }
-        
-        $content = array_merge($this->assets(), $this->$content);
+
+        $content = array_merge($this->nav, array_merge($this->assetsArray(), $this->content));
 
         return $this->mustache->render($this->tpl, $content);
     }
