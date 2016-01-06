@@ -28,30 +28,31 @@ class Session {
      * Sets session settings and initializes php session. Sets variables for use.
      */
     public function __construct() {
-        // Setup PHP session handling.
-        $config = new Config();
-        session_name(DFP_SESSION_NAME);
-        ini_set("session.gc_maxlifetime", DFP_SESSION_LIFE);
-        if ($config->get('server', 'https') === 'https://') {
-            $https = true;
-        } else {
-            $https = false;
-        }
-
-        session_set_cookie_params(DFP_SESSION_LIFE, Utility::buildFullLink($config, true, 'session'), $config->get('server', 'name'), $https, true);
-        unset($config);
-
         // Determine if a new session or current.
         $sid = filter_input(INPUT_COOKIE, DFP_SESSION_NAME);
 
-        if (!isset($sid) || !$this->isSession($sid)) {
-            $this->sid = $this->newSession();
-        } else {
-            $this->sid = $sid;
-        }
-
         // Start the session.
         if (session_status() !== PHP_SESSION_ACTIVE) {
+            if (!isset($sid) || !$this->isSession($sid)) {
+                $this->sid = $this->newSession();
+            } else {
+                $this->sid = $sid;
+            }
+
+            // Setup PHP session handling.
+            $config = new Config();
+            session_name(DFP_SESSION_NAME);
+            ini_set("session.gc_maxlifetime", DFP_SESSION_LIFE);
+
+            if ($config->get('server', 'protocol') === 'https://') {
+                $https = true;
+            } else {
+                $https = false;
+            }
+
+            session_set_cookie_params(DFP_SESSION_LIFE, Utility::buildFullLink($config, true, 'session'), $config->get('server', 'name'), $https, true);
+            unset($config);
+
             session_start();
         }
 
@@ -186,7 +187,7 @@ class Session {
      */
     public function getTMP($key) {
         if (isset($_SESSION[$key])) {
-            return filter_var($_SESSION[$key]);
+            return $_SESSION[$key];
         }
 
         return false;
