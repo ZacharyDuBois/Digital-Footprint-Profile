@@ -22,7 +22,7 @@ class Utility {
     public static function generateSID() {
         $key = null;
 
-        while (!Session::isSession($key) || $key === null) {
+        while (Session::isSession($key) || $key === null) {
             $key = sha1(time() . '-' . microtime(true) . '-' . rand(0, PHP_INT_MAX) . filter_input(INPUT_SERVER, 'HTTP_USER_AGENT'));
         }
 
