@@ -101,7 +101,7 @@ class Twitter {
         $twitter->setDecodeJsonAsArray(true);
 
         // Need twitter ID of most recent tweet.
-        $beginingID = $twitter->get("statuses/user_timeline", array("count" => 1, 'screen_name' => $this->session->getTMP('twitter_name')));
+        $beginingID = $twitter->get("statuses/user_timeline", array("count" => 1, 'screen_name' => $this->session->getTMP('twitter_name'), 'include_rts' => true, 'exclude_replies' => false));
         // Add one because it will be subtracted later.
         $beginingID = $beginingID[0]['id'] + 1;
 
@@ -117,7 +117,7 @@ class Twitter {
                 $lastID = $beginingID;
             }
 
-            $postsRaw = $twitter->get("statuses/user_timeline", array("count" => 200, 'max_id' => $lastID - 1, 'screen_name' => $this->session->getTMP('twitter_name')));
+            $postsRaw = $twitter->get("statuses/user_timeline", array("count" => 200, 'max_id' => $lastID - 1, 'screen_name' => $this->session->getTMP('twitter_name'), 'include_rts' => true, 'exclude_replies' => false));
 
             $count = count($postsRaw);
             $total = $total + $count;
