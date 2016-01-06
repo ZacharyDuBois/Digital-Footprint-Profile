@@ -13,6 +13,7 @@ $denied = filter_input(INPUT_REQUEST, 'denied');
 if (!isset($denied)) {
 // Create twitter.
     $twitter = new Twitter();
+    $twitter->accessToken();
     $twitter->getPosts();
 }
 
