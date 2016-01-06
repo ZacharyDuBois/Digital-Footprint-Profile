@@ -44,7 +44,9 @@ class Twitter {
      */
     public function authorizeURL() {
         $twitter = new TwitterOAuth($this->config->get('twitter', 'consumer'), $this->config->get('twitter', 'secret'));
-        $requestToken = $twitter->oauth('oauth/request_token', array('oauth_callback' => Utility::buildFullLink($this->config, false, 'callback/twitter')));
+        $twitter->setDecodeJsonAsArray(true);
+
+        $requestToken = $twitter->oauth('oauth/request_token', array('oauth_callback' => Utility::buildFullLink($this->config, false, 'session/callback/twitter')));
 
         if ($requestToken['oauth_callback_confirmed'] != true) {
             throw new Exception("OAuth Callback was not confirmed.");
@@ -67,14 +69,14 @@ class Twitter {
      */
     public function accessToken() {
         $twitter = new TwitterOAuth($this->config->get('twitter', 'consumer'), $this->config->get('twitter', 'secret'), $this->session->getTMP('twitter_request_token')['oauth_token'], $this->session->getTMP('twitter_request_token')['oauth_token_secret']);
+        $twitter->setDecodeJsonAsArray(true);
 
-
-        if (filter_input(INPUT_REQUEST, 'oauth_token') && filter_input(INPUT_REQUEST, 'oauth_token') !== $this->session->getTMP('twitter_request_token')['oauth_token']) {
+        if (filter_input(INPUT_GET, 'oauth_token') && filter_input(INPUT_GET, 'oauth_token') !== $this->session->getTMP('twitter_request_token')['oauth_token']) {
             // Something weird happened.
             throw new Exception("OAuth tokens to not match.");
         }
 
-        $accessToken = $twitter->oauth('oauth/access_token', array('oauth_verifier' => filter_input(INPUT_REQUEST, 'oauth_verifier')));
+        $accessToken = $twitter->oauth('oauth/access_token', array('oauth_verifier' => filter_input(INPUT_GET, 'oauth_verifier')));
 
         if (!isset($accessToken['screen_name'])) {
             throw new Exception("Access token did not receive screen_name.");
@@ -97,7 +99,7 @@ class Twitter {
     public function getPosts() {
         $this->accessToken();
         $twitter = new TwitterOAuth($this->config->get('twitter', 'consumer'), $this->config->get('twitter', 'secret'), $this->session->getTMP('twitter_access_token')['oauth_token'], $this->session->getTMP('twitter_access_token')['oauth_token_secret']);
-
+        $twitter->setDecodeJsonAsArray(true);
 
         // Need twitter ID of most recent tweet.
         $beginingID = $twitter->get("statuses/user_timeline", array("count" => 1, 'screen_name' => $this->session->getTMP('twitter_name')));
@@ -125,7 +127,8 @@ class Twitter {
             foreach ($postsRaw as $post => $content) {
                 $posts[] = array(
                     'url'     => 'https://twitter.com/statuses/' . $content[$post]['id'],
-                    'content' => $content[0]['text']
+                    'content' => $content[0]['text'],
+                    'network' => 'twitter'
                 );
             }
         }
