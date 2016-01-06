@@ -80,37 +80,41 @@ class Route {
 
             // Session routing is a bit more complex.
             case 'session':
-                switch ($endpointArray[1]) {
-                    case '':
-                        return 'session';
-                    case 'authorize':
-                    case 'list':
-                    case 'email':
-                    case 'end':
-                        if (count($endpointArray) === 2) {
-                            return $endpointArray[1];
-                        }
+                if (!isset($endpointArray[1])) {
+                    return 'session';
+                } else {
+                    switch ($endpointArray[1]) {
+                        case '':
+                            return 'session';
+                        case 'authorize':
+                        case 'list':
+                        case 'email':
+                        case 'end':
+                            if (count($endpointArray) === 2) {
+                                return $endpointArray[1];
+                            }
 
-                        return 404;
+                            return 404;
 
-                    case 'callback':
-                        switch ($endpointArray[2]) {
-                            case 'twitter':
-                            case 'facebook':
-                            case 'instagram':
-                            case 'tumblr':
-                                if (count($endpointArray) === 3) {
-                                    return $endpointArray[2];
-                                }
+                        case 'callback':
+                            switch ($endpointArray[2]) {
+                                case 'twitter':
+                                case 'facebook':
+                                case 'instagram':
+                                case 'tumblr':
+                                    if (count($endpointArray) === 3) {
+                                        return $endpointArray[2];
+                                    }
 
-                                return 404;
+                                    return 404;
 
-                            default:
-                                return 404;
-                        }
+                                default:
+                                    return 404;
+                            }
 
-                    default:
-                        return 404;
+                        default:
+                            return 404;
+                    }
                 }
 
             default:
