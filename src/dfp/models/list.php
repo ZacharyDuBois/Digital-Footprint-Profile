@@ -32,19 +32,33 @@ $parse = new Parse();
 
 // List array
 $list = array();
+$total = 0;
+$flagged = 0;
 
 foreach ($session->get('twitter') as $post) {
     $parse->parse($post['content']);
+    $score = $parse->score();
+    $tags = $parse->tags();
 
-    $list[] = array(
-        'url'     => $post['url'],
-        'score'   => $parse->score(),
-        'tags'    => $parse->tags(),
-        'content' => $post['content']
-    );
+    if ($score >= 3) {
+        $list[] = array(
+            'url'     => $post['url'],
+            'score'   => $score,
+            'tags'    => $tags,
+            'content' => $post['content']
+        );
+
+        $flagged++;
+    }
+
+    $total++;
 }
 
 $view->content(array(
-    'title' => 'Your Posts | Digital Footprint Profile',
-    'posts' => $list
+    'title'   => 'Your Posts | Digital Footprint Profile',
+    'posts'   => $list,
+    'total'   => $total,
+    'flagged' => $flagged
 ));
+
+echo $view->render();

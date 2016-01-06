@@ -15,6 +15,9 @@
             </div>
 
             <div class="col l12 m12 s12">
+                <p>Digital Footprint Profile has scanned {{total}} of your posts and {{flagged}} of them scored 3 or higher.</p>
+            </div>
+            <div class="col l12 m12 s12">
                 {{#posts}}
                     <div class="card green darken-1">
                         <div class="card-content yellow-text">
@@ -22,7 +25,7 @@
                             <p>{{content}}.</p>
                         </div>
                         <div class="card-action">
-                            <a href="{{url}}">Link to Post</a> | {{tags}}
+                            <a href="{{url}}">Link {{tags}}</a>
                         </div>
                     </div>
                 {{/posts}}
