@@ -125,9 +125,8 @@ class Twitter {
 
             foreach ($postsRaw as $post => $content) {
                 $posts[] = array(
-                    'url'     => 'https://twitter.com/statuses/' . $content[$post]['id'],
-                    'content' => $content[0]['text'],
-                    'network' => 'twitter'
+                    'url'     => 'https://twitter.com/statuses/' . $content['id'],
+                    'content' => $content['text'],
                 );
             }
         }
