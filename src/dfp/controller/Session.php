@@ -71,7 +71,7 @@ class Session {
      * @param string $sid
      * @return bool
      */
-    public static function isSession($sid) {
+    private static function isSession($sid) {
         if (Validate::sid($sid)) {
             return file_exists(STORAGE . $sid . '.json');
         }
