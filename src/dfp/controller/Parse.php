@@ -22,7 +22,7 @@ class Parse {
     private
         $insight,
         $DataStore,
-        $rules,
+        $keywords,
         $content,
         $insightScore,
         $keywordScore;
@@ -36,7 +36,7 @@ class Parse {
         $this->insight = new Sentiment();
         $this->DataStore = new DataStore();
         $this->DataStore->setFile(KEYWORDS);
-        $this->rules = $this->DataStore->read();
+        $this->keywords = $this->DataStore->read();
     }
 
     /**
@@ -47,7 +47,7 @@ class Parse {
      * @param string $content
      */
     public function parse($content) {
-        $this->content = filter_var($content);
+        $this->content = strtolower(filter_var($content));
         $this->insightScore = $this->sentiment();
         $this->keywordScore = $this->keywords();
     }
@@ -60,7 +60,7 @@ class Parse {
      * @return int
      */
     public function score() {
-        $score = $this->keywordScore + $this->sentiment();
+        $score = $this->keywordScore + $this->insightScore;
 
         if ($score > 10) {
             $score = 10;
@@ -74,17 +74,17 @@ class Parse {
      *
      * Retrieves post tags.
      *
-     * @return array
+     * @return string
      */
     public function tags() {
-        $tags = array();
+        $tags = '';
 
         if ($this->keywordScore > 0) {
-            $tags[] = 'Keywords found. Points: ' . $this->keywordScore;
+            $tags .= '| Keywords found. Points: ' . $this->keywordScore . ' ';
         }
 
         if ($this->insightScore > 0) {
-            $tags[] = 'Post appears negative. Points: ' . $this->insightScore;
+            $tags .= '| Post appears negative. Points: ' . $this->insightScore;
         }
 
         return $tags;
@@ -100,8 +100,8 @@ class Parse {
     private function keywords() {
         $score = 0;
 
-        foreach ($this->DataStore as $rule => $weight) {
-            if (strpos($this->content, $rule) !== false) {
+        foreach ($this->keywords as $keyword => $weight) {
+            if (strstr($this->content, $keyword) !== false) {
                 $score = $score + $weight;
             }
         }
