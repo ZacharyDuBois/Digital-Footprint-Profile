@@ -64,6 +64,10 @@ class Route {
 
         array_shift($endpointArray);
 
+        if (isset($endpointArray[2])) {
+            $endpointArray[2] = explode('?', $endpointArray[2])[0];
+        }
+
         switch ($endpointArray[0]) {
             // Basically returns top level pages.
             case '':
@@ -84,8 +88,6 @@ class Route {
                     return 'session';
                 } else {
                     switch ($endpointArray[1]) {
-                        case '':
-                            return 'session';
                         case 'authorize':
                         case 'list':
                         case 'email':
