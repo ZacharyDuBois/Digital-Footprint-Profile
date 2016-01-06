@@ -13,7 +13,7 @@ namespace dfp;
 $session = new Session();
 
 // Create config
-//$config = new Config();
+$config = new Config();
 
 // Create Nav
 $nav = new Nav();
@@ -25,7 +25,7 @@ $view->navArray($nav->navArray());
 $view->tpl('session');
 
 // Twitter
-if ($session->getTMP('twitter_name') === false) {
+if ($session->get('twitter') === false) {
     $twitter = new Twitter();
     $twitterButton = array(
         'url'     => $twitter->authorizeURL(),
@@ -43,8 +43,11 @@ if ($session->getTMP('twitter_name') === false) {
 // Render and return
 $view->content(array(
     'title'        => 'Start | Digital Footprint Profile',
+    'listURL' => Utility::buildFullLink($config, false, 'session/list'),
     'loginButtons' => array(
         $twitterButton,
         // Others
     )
 ));
+
+echo $view->render();
