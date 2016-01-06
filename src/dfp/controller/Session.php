@@ -20,8 +20,7 @@ class Session {
     private
         $fileSession,
         $DataStore,
-        $sid,
-        $phpSession;
+        $sid;
 
     /**
      * Session constructor.
@@ -33,26 +32,33 @@ class Session {
         $config = new Config();
         session_name(DFP_SESSION_NAME);
         ini_set("session.gc_maxlifetime", DFP_SESSION_LIFE);
-        session_set_cookie_params(DFP_SESSION_LIFE, $config->get('server', 'base') . '/session', $config->get('server', 'name'), $config->get('server', 'https'), true);
+        if ($config->get('server', 'https') === 'https://') {
+            $https = true;
+        } else {
+            $https = false;
+        }
+
+        session_set_cookie_params(DFP_SESSION_LIFE, Utility::buildFullLink($config, true, 'session'), $config->get('server', 'name'), $https, true);
         unset($config);
 
         // Determine if a new session or current.
         $sid = filter_input(INPUT_COOKIE, DFP_SESSION_NAME);
 
-        if (isset($sid) || !$this->isSession($sid)) {
+        if (!isset($sid) || !$this->isSession($sid)) {
             $this->sid = $this->newSession();
         } else {
             $this->sid = $sid;
         }
 
         // Start the session.
-        session_start();
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
 
         // Set variables.
         $this->DataStore = new DataStore();
         $this->DataStore->setFile(STORAGE . $this->sid . '.json');
         $this->fileSession = $this->DataStore->read();
-        $this->phpSession = filter_input_array(INPUT_SESSION);
 
         if (!isset($this->fileSession['dfp']['expire'])) {
             // Is new session, initialize data.
@@ -179,9 +185,8 @@ class Session {
      * @return string|array|false
      */
     public function getTMP($key) {
-        $value = $this->phpSession[$key];
-        if (isset($value)) {
-            return $value;
+        if (isset($_SESSION[$key])) {
+            return filter_var($_SESSION[$key]);
         }
 
         return false;
@@ -212,9 +217,8 @@ class Session {
      * @return string|array|false
      */
     public function get($key) {
-        $value = $this->fileSession['data'][$key];
-        if (isset($value)) {
-            return $value;
+        if (isset($this->fileSession['data'][$key])) {
+            return $this->fileSession['data'][$key];
         }
 
         return false;
