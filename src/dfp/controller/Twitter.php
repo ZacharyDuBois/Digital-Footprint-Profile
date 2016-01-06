@@ -97,7 +97,6 @@ class Twitter {
      * @throws Exception
      */
     public function getPosts() {
-        $this->accessToken();
         $twitter = new TwitterOAuth($this->config->get('twitter', 'consumer'), $this->config->get('twitter', 'secret'), $this->session->getTMP('twitter_access_token')['oauth_token'], $this->session->getTMP('twitter_access_token')['oauth_token_secret']);
         $twitter->setDecodeJsonAsArray(true);
 
