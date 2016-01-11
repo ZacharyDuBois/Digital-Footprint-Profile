@@ -150,7 +150,7 @@ class Session {
     public function endSession() {
         // Remove the cookie.
         $config = new Config();
-        setcookie(DFP_SESSION_NAME, $this->sid, (DFP_SESSION_LIFE - 1), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'name'), Utility::httpsBool($config), true));
+        setcookie(DFP_SESSION_NAME, $this->sid, (DFP_SESSION_LIFE - 1), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'name'), Utility::httpsBool($config), true);
 
         // Update file expire.
         $this->fileSession['dfp']['expire'] = time();
