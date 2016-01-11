@@ -74,4 +74,23 @@ class Utility {
 
         return true;
     }
+
+    /**
+     * HTTPS Bool
+     *
+     * Gets HTTPS status in bool form
+     *
+     * @param Config $config
+     * @return bool
+     * @throws Exception
+     */
+    public static function httpsBool(Config $config) {
+        if ($config->get('server', 'protocol') === 'https://') {
+            return true;
+        } elseif ($config->get('server', 'protocol') === 'http://') {
+            return false;
+        }
+
+        throw new Exception("Protocol is not known. " . $config->get('server', 'protocol') === 'https://');
+    }
 }

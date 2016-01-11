@@ -31,29 +31,24 @@ class Session {
         // Determine if a new session or current.
         $sid = filter_input(INPUT_COOKIE, DFP_SESSION_NAME);
 
+        if (isset($sid) && $sid !== false && defined('DFP_SESSION_SID')) {
+            $sid = DFP_SESSION_SID;
+        }
+
         // Start the session.
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            if (!isset($sid) || !$this->isSession($sid)) {
-                $this->sid = $this->newSession();
-            } else {
-                $this->sid = $sid;
-            }
+        if (!$this->isSession($sid) || !defined('DFP_SESSION_SID')) {
+            $this->sid = $this->newSession();
+            define('DFP_SESSION_SID', $this->sid);
 
-            // Setup PHP session handling.
             $config = new Config();
-            session_name(DFP_SESSION_NAME);
-            ini_set("session.gc_maxlifetime", DFP_SESSION_LIFE);
 
-            if ($config->get('server', 'protocol') === 'https://') {
-                $https = true;
-            } else {
-                $https = false;
-            }
+            setcookie(DFP_SESSION_NAME, $this->sid, DFP_SESSION_LIFE, Utility::buildFullLink($config, true, 'session'), $config->get('server', 'name'), Utility::httpsBool($config), true);
 
-            session_set_cookie_params(DFP_SESSION_LIFE, Utility::buildFullLink($config, true, 'session'), $config->get('server', 'name'), $https, true);
             unset($config);
 
-            session_start();
+        } else {
+
+            $this->sid = $sid;
         }
 
         // Set variables.
@@ -95,7 +90,6 @@ class Session {
      */
     private function newSession() {
         $sid = Utility::generateSID();
-        session_id($sid);
 
         return $sid;
     }
@@ -114,7 +108,7 @@ class Session {
         $data = array(
             'dfp'   => array(
                 'create' => $time,
-                'expire' => $time + DFP_SESSION_LIFE,
+                'expire' => ($time + DFP_SESSION_LIFE),
                 'sid'    => $this->sid
             ),
             'data'  => array(),
@@ -154,16 +148,9 @@ class Session {
      * @throws Exception
      */
     public function endSession() {
-        // Clear session data.
-        $_SESSION = array();
-
         // Remove the cookie.
-        $cookieParams = session_get_cookie_params();
-        setcookie(DFP_SESSION_NAME, '', time() - 1, $cookieParams['path'], $cookieParams['domain'], $cookieParams['secure'], true);
-
-        // End the PHP sessions.
-        session_unset();
-        session_destroy();
+        $config = new Config();
+        setcookie(DFP_SESSION_NAME, $this->sid, (DFP_SESSION_LIFE - 1), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'name'), Utility::httpsBool($config), true));
 
         // Update file expire.
         $this->fileSession['dfp']['expire'] = time();
@@ -172,22 +159,20 @@ class Session {
             throw new Exception("Unable to update session expire time.");
         }
 
-        define('DFP_SESSION_ENDED', true);
-
         return true;
     }
 
     /**
      * Get Temporary Session Information
      *
-     * Get information stored in the PHP session.
+     * Get information stored in the DataStore.
      *
      * @param string $key
-     * @return string|array|false
+     * @return string|array|int|false
      */
     public function getTMP($key) {
-        if (isset($_SESSION[$key])) {
-            return $_SESSION[$key];
+        if (isset($this->get('tmp')[$key])) {
+            return $this->get('tmp')[$key];
         }
 
         return false;
@@ -196,17 +181,31 @@ class Session {
     /**
      * Set Temporary Session Information
      *
-     * Sets temporary information to the PHP session.
+     * Sets temporary information to the DataStore.
      * Used for request keys, etc.
      *
      * @param string $key
-     * @param string|array $value
+     * @param string|int|array $value
      * @return true
+     * @throws Exception
      */
     public function setTMP($key, $value) {
-        $_SESSION[$key] = $value;
+        $pre = $this->get('tmp');
+        $pre[$key] = $value;
 
-        return true;
+        return $this->set('tmp', $pre);
+    }
+
+    /**
+     * Clear TMP Session Information
+     *
+     * Clears all temporary session information.
+     *
+     * @return true
+     * @throws Exception
+     */
+    public function clearTMP() {
+        return $this->set('tmp', '');
     }
 
     /**
