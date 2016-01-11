@@ -31,24 +31,21 @@ class Session {
         // Determine if a new session or current.
         $sid = filter_input(INPUT_COOKIE, DFP_SESSION_NAME);
 
-        if (isset($sid) && $sid !== false && defined('DFP_SESSION_SID')) {
+        if ((!isset($sid) || $sid === false) && defined('DFP_SESSION_SID')) {
             $sid = DFP_SESSION_SID;
         }
 
         // Start the session.
-        if (!$this->isSession($sid) || !defined('DFP_SESSION_SID')) {
+        if (!$this->isSession($sid)) {
             $this->sid = $this->newSession();
             define('DFP_SESSION_SID', $this->sid);
 
             $config = new Config();
 
-            setcookie(DFP_SESSION_NAME, $this->sid, DFP_SESSION_LIFE, Utility::buildFullLink($config, true, 'session'), $config->get('server', 'name'), Utility::httpsBool($config), true);
+            setcookie(DFP_SESSION_NAME, $this->sid, (time() + DFP_SESSION_LIFE), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'domain'), Utility::httpsBool($config), true);
 
             unset($config);
 
-        } else {
-
-            $this->sid = $sid;
         }
 
         // Set variables.
@@ -108,7 +105,7 @@ class Session {
         $data = array(
             'dfp'   => array(
                 'create' => $time,
-                'expire' => ($time + DFP_SESSION_LIFE),
+                'expire' => (DFP_SESSION_LIFE + $time),
                 'sid'    => $this->sid
             ),
             'data'  => array(),
@@ -150,7 +147,7 @@ class Session {
     public function endSession() {
         // Remove the cookie.
         $config = new Config();
-        setcookie(DFP_SESSION_NAME, $this->sid, (DFP_SESSION_LIFE - 1), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'name'), Utility::httpsBool($config), true);
+        setcookie(DFP_SESSION_NAME, $this->sid, (time() - 1), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'domain'), Utility::httpsBool($config), true);
 
         // Update file expire.
         $this->fileSession['dfp']['expire'] = time();
