@@ -1,0 +1,33 @@
+[[ GLOBAL ]]
+connection=wifi
+network_interface=wlan0
+dhcp=yes
+dns_server=8.8.8.8 8.8.4.4
+ssid_name=WIFINAME
+wifi_encryption=wpa
+wpa_password=WIFIPASSWORD
+browser=firefox
+autohide_navigation_bar=yes
+managed_bookmarks=https://dfp.zacharydubois.moe https://twitter.com https://instagram.com https://facebook.com https://tumblr.com https://github.com https://zacharydubois.me
+homepage_append=hostname
+homepage_check=Homepage is not available - please contact your administrator.
+homepage=https://dfp.zacharydubois.moe/kiosk.php
+whitelist=github.com zacharydubois.me zacharydubois.moe facebook.com instagram.com tumblr.com twitter.com
+allow_icmp_protocol=yes
+browser_idle=5
+kiosk_config=https://dfp.mydomain.tld/some/random/place/kiosk.txt
+disable_private_mode=yes
+root_password=root
+screensaver_idle=5
+shutdown_combination=yes
+volume_level=50%
+timezone=America/New_York
+screensaver_video=https://dfp.mydomain.tld/screenvideo.mp4
+vnc_interactive=yes
+vnc_password=SOMEPASSWORD
+wallpaper=https://dfp.mydomain.tld/kiosk-wall.png
+zRAM=25%
+additional_components=09-x11vnc.xzm uefi.zip 08-ssh.xzm 06-fonts.xzm
+
+[[ KIOSK ID ]]
+hostname=KIOSK1
