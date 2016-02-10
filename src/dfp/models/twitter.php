@@ -12,7 +12,8 @@ namespace dfp;
 $denied = filter_input(INPUT_GET, 'denied');
 
 $config = new Config();
-if (!isset($denied) || isset($_GET['oauth_verifier'])) {
+
+if (!isset($denied) || array_key_exists('oauth_verifier', $_GET)) {
 // Create twitter.
     $twitter = new Twitter($config, new Session($config));
     $twitter->accessToken();

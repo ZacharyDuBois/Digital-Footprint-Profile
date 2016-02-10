@@ -48,7 +48,7 @@ class Session {
         $this->DataStore->setFile(STORAGE . $this->sid . '.json');
         $this->fileSession = $this->DataStore->read();
 
-        if (!in_array('dfp', $this->fileSession)) {
+        if (!array_key_exists('dfp', $this->fileSession)) {
             // Is new session, initialize data.
             $this->initData();
         } elseif ($this->isExpired()) {
@@ -161,7 +161,7 @@ class Session {
      * @return string|array|int|false
      */
     public function getTMP($key) {
-        if (isset($this->get('tmp')[$key])) {
+        if (array_key_exists($key, $this->get('tmp'))) {
             return $this->get('tmp')[$key];
         }
 
@@ -207,7 +207,7 @@ class Session {
      * @return string|array|false
      */
     public function get($key) {
-        if (isset($this->fileSession['data'][$key])) {
+        if (array_key_exists($key, $this->fileSession['data'])) {
             return $this->fileSession['data'][$key];
         }
 

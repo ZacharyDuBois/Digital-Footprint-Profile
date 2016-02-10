@@ -81,7 +81,7 @@ class Twitter {
 
         $accessToken = $twitter->oauth('oauth/access_token', array('oauth_verifier' => filter_input(INPUT_GET, 'oauth_verifier')));
 
-        if (!isset($accessToken['screen_name'])) {
+        if (!array_key_exists('screen_name', $accessToken)) {
             throw new Exception("Access token did not receive screen_name.");
         }
 
