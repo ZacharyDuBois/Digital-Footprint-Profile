@@ -36,18 +36,14 @@ class Session {
         $this->sid = filter_input(INPUT_COOKIE, DFP_SESSION_NAME);
 
         $this->config = $config;
+        $this->DataStore = new DataStore();
 
-        // Start the session.
         if (!$this->isSession($this->sid)) {
-            $this->sid = $this->newSession();
-
-            setcookie(DFP_SESSION_NAME, $this->sid, (time() + DFP_SESSION_LIFE), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'domain'), Utility::httpsBool($config), true);
+            $this->reload();
+        } else {
+            $this->newSession();
         }
 
-        // Set variables.
-        $this->DataStore = new DataStore();
-        $this->DataStore->setFile(STORAGE . $this->sid . '.json');
-        $this->fileSession = $this->DataStore->read();
 
         if (!array_key_exists('dfp', $this->fileSession)) {
             // Is new session, initialize data.
@@ -81,12 +77,33 @@ class Session {
      *
      * Sets the SID for new sessions.
      *
-     * @return string
+     * @return true
      */
     private function newSession() {
-        $sid = Utility::generateSID();
+        // Start the session.
+        $this->sid = Utility::generateSID();
 
-        return $sid;
+        setcookie(DFP_SESSION_NAME, $this->sid, (time() + DFP_SESSION_LIFE), Utility::buildFullLink($this->config, true, 'session'), $this->config->get('server', 'domain'), Utility::httpsBool($this->config), true);
+
+        // Set variables.
+        $this->reload();
+
+        return true;
+    }
+
+    /**
+     * Load Session
+     *
+     * Loads the session file that is set in $this->sid.
+     *
+     * @return true
+     * @throws Exception
+     */
+    private function reload() {
+        $this->DataStore->setFile(STORAGE . $this->sid . '.json');
+        $this->fileSession = $this->DataStore->read();
+
+        return true;
     }
 
     /**
@@ -100,9 +117,9 @@ class Session {
     private function initData() {
         $data = array(
             'dfp'   => array(
-                'create'  => time(),
+                'create' => time(),
                 'expire' => (time() + DFP_SESSION_LIFE),
-                'sid'     => $this->sid
+                'sid'    => $this->sid
             ),
             'data'  => array(),
             'email' => null
@@ -126,6 +143,8 @@ class Session {
      */
     private function isExpired() {
         if (time() > $this->fileSession['dfp']['expire']) {
+            $this->newSession();
+
             return true;
         }
 
