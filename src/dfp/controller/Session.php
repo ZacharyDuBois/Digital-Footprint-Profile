@@ -101,7 +101,7 @@ class Session {
         $data = array(
             'dfp'   => array(
                 'create'  => time(),
-                'expired' => (time() + DFP_SESSION_LIFE),
+                'expire' => (time() + DFP_SESSION_LIFE),
                 'sid'     => $this->sid
             ),
             'data'  => array(),
