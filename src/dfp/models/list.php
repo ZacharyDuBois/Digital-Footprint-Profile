@@ -13,7 +13,7 @@ namespace dfp;
 $config = new Config();
 
 // Session
-$session = new Session();
+$session = new Session($config);
 
 if ($session->get('twitter') === false) {
     header('Location: ' . Utility::buildFullLink($config, false, 'session'));
@@ -22,7 +22,7 @@ if ($session->get('twitter') === false) {
 // View
 $nav = new Nav();
 $nav->setActive('list');
-$view = new View();
+$view = new View($config);
 $view->tpl('list');
 $view->navArray($nav->navArray());
 

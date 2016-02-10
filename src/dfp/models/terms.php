@@ -10,7 +10,7 @@
 namespace dfp;
 
 // Create objects.
-$view = new View();
+$view = new View(new Config());
 $nav = new Nav();
 
 // Create nav.
