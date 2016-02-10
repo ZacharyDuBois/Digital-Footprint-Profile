@@ -35,6 +35,7 @@ class Utility {
      * Builds full link using protocol, host and base.
      *
      * @param Config $config
+     * @param bool $relative
      * @param string $endpoint
      * @return string
      */

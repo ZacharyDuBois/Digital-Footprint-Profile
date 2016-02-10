@@ -125,6 +125,7 @@ class View {
      * Renders and returns the rendered template.
      *
      * @return string
+     * @throws Exception
      */
     public function render() {
         if ($this->tpl !== 'email' && isset($this->content) && isset($this->tpl) && isset($this->nav)) {

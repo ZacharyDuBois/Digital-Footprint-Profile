@@ -107,7 +107,7 @@ class Email {
         try {
             $response = $sendgrid->send($email);
         } catch (\SendGrid\Exception $e) {
-            throw new \dfp\Exception($e);
+            throw new Exception($e);
         }
 
         if ($response->getBody['message'] === 'success') {
