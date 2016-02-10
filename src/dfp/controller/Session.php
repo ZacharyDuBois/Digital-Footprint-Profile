@@ -38,7 +38,7 @@ class Session {
         $this->config = $config;
         $this->DataStore = new DataStore();
 
-        if (!$this->isSession($this->sid)) {
+        if ($this->isSession($this->sid)) {
             $this->reload();
         } else {
             $this->newSession();
