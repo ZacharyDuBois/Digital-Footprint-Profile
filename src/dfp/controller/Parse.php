@@ -101,8 +101,10 @@ class Parse {
         $score = 0;
 
         foreach ($this->keywords as $keyword => $weight) {
-            if (strstr($this->content, $keyword) !== false) {
-                $score = $score + $weight;
+            $reg = preg_match('/[\ \-](' . $keyword . '|' . $keyword . '| ' . $keyword . ' [\ \.\!\?])/g', $this->content, $matches);
+
+            if (count($matches) > 0 && $reg === true) {
+                $score = $score * count($matches);
             }
         }
 
