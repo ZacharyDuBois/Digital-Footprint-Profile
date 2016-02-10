@@ -20,7 +20,7 @@ if ($session->get('twitter') === false) {
 }
 
 // View
-$nav = new Nav();
+$nav = new Nav($config);
 $nav->setActive('list');
 $view = new View($config);
 $view->tpl('list');
