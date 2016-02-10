@@ -13,6 +13,7 @@ namespace dfp;
  * Class Session
  *
  * Handles session generation, storage, and $_SESSION.
+ * TODO: Allow more than one session to be running.
  *
  * @package dfp
  */
@@ -29,23 +30,17 @@ class Session {
      */
     public function __construct() {
         // Determine if a new session or current.
-        $sid = filter_input(INPUT_COOKIE, DFP_SESSION_NAME);
-
-        if ((!isset($sid) || $sid === false) && defined('DFP_SESSION_SID')) {
-            $sid = DFP_SESSION_SID;
-        }
+        $this->sid = filter_input(INPUT_COOKIE, DFP_SESSION_NAME);
 
         // Start the session.
-        if (!$this->isSession($sid)) {
+        if (!$this->isSession($this->sid)) {
             $this->sid = $this->newSession();
-            define('DFP_SESSION_SID', $this->sid);
 
             $config = new Config();
 
             setcookie(DFP_SESSION_NAME, $this->sid, (time() + DFP_SESSION_LIFE), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'domain'), Utility::httpsBool($config), true);
 
             unset($config);
-
         }
 
         // Set variables.
@@ -53,7 +48,7 @@ class Session {
         $this->DataStore->setFile(STORAGE . $this->sid . '.json');
         $this->fileSession = $this->DataStore->read();
 
-        if (!isset($this->fileSession['dfp']['expire'])) {
+        if (!in_array('dfp', $this->fileSession)) {
             // Is new session, initialize data.
             $this->initData();
         } elseif ($this->isExpired()) {
@@ -100,23 +95,21 @@ class Session {
      * @throws Exception
      */
     private function initData() {
-        $time = time();
-
         $data = array(
             'dfp'   => array(
-                'create' => $time,
-                'expire' => (DFP_SESSION_LIFE + $time),
-                'sid'    => $this->sid
+                'create'  => time(),
+                'expired' => (time() + DFP_SESSION_LIFE),
+                'sid'     => $this->sid
             ),
             'data'  => array(),
             'email' => null
         );
 
-        $this->fileSession = $data;
-
         if (!$this->DataStore->write($data)) {
             throw new Exception("Failed to write initialization data.");
         }
+
+        $this->fileSession = $this->DataStore->read();
 
         return true;
     }
@@ -129,7 +122,7 @@ class Session {
      * @return bool
      */
     private function isExpired() {
-        if ($this->fileSession['dfp']['expire'] <= time()) {
+        if (time() > $this->fileSession['dfp']['expire']) {
             return true;
         }
 
