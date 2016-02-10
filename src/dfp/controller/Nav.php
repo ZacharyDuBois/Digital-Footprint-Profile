@@ -53,7 +53,7 @@ class Nav {
      *
      * @return array
      */
-    public function navArray() {
+    public function navArray($displayLogout = false) {
         $navItems = array(
             ''        => 'Home',
             'session' => 'Start',
@@ -61,6 +61,10 @@ class Nav {
             'terms'   => 'Terms',
             'privacy' => 'Privacy'
         );
+
+        if ($displayLogout === true) {
+            $navItems['end'] = 'Logout';
+        }
 
         $navArray = array();
         $navArray['nav'] = array();
