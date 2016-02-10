@@ -27,16 +27,16 @@ class Session {
      * Session constructor.
      *
      * Sets session settings and initializes php session. Sets variables for use.
+     *
+     * @param Config $config
      */
-    public function __construct() {
+    public function __construct(Config $config) {
         // Determine if a new session or current.
         $this->sid = filter_input(INPUT_COOKIE, DFP_SESSION_NAME);
 
         // Start the session.
         if (!$this->isSession($this->sid)) {
             $this->sid = $this->newSession();
-
-            $config = new Config();
 
             setcookie(DFP_SESSION_NAME, $this->sid, (time() + DFP_SESSION_LIFE), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'domain'), Utility::httpsBool($config), true);
 

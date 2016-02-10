@@ -29,13 +29,16 @@ class View {
      * view constructor.
      *
      * Create new \Mustache_Engine object.
+     *
+     * @param Config $config
      */
-    public function __construct() {
+    public function __construct(Config $config) {
         $this->mustache = new \Mustache_Engine(array(
             'loader'          => new \Mustache_Loader_FilesystemLoader(THEME),
             'partials_loader' => new \Mustache_Loader_FilesystemLoader(THEME . 'partials' . DS)
         ));
-        $this->config = new Config();
+
+        $this->config = $config;
     }
 
     /**

@@ -27,7 +27,8 @@ class Run {
      * @throws Exception
      */
     public function letsGo() {
-        $route = new Route();
+        $config = new Config();
+        $route = new Route($config);
         $request = $route->guide();
 
 

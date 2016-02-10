@@ -25,9 +25,11 @@ class Nav {
      * Nav constructor.
      *
      * Grabs some basic configuration information.
+     *
+     * @param Config $config
      */
-    public function __construct() {
-        $this->config = new Config();
+    public function __construct(Config $config) {
+        $this->config = $config;
     }
 
     /**

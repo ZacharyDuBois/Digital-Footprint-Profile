@@ -28,10 +28,13 @@ class Twitter {
      * Twitter constructor.
      *
      * Creates config and session objects.
+     *
+     * @param Config $config
+     * @param Session $session
      */
-    public function __construct() {
-        $this->config = new Config();
-        $this->session = new Session();
+    public function __construct(Config $config, Session $session) {
+        $this->config = $config;
+        $this->session = $session;
     }
 
     /**

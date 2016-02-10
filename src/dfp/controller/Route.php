@@ -26,9 +26,11 @@ class Route {
      * Route constructor.
      *
      * Gets the base URL from the config and removes it to create a usable endpoint.
+     *
+     * @param Config $config
      */
-    public function __construct() {
-        $this->config = new Config();
+    public function __construct(Config $config) {
+        $this->config = $config;
         $this->base = $this->config->get('server', 'base');
 
         if ($this->base === false) {
