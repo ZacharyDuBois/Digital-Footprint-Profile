@@ -6,3 +6,11 @@
  * Time: 20:49
  * Project: Digital-Footprint-Profile
  */
+
+namespace dfp;
+
+$config = new Config();
+$session = new Session($config);
+$session->endSession();
+
+header('Location: ' . Utility::buildFullLink($config, false, ''));
