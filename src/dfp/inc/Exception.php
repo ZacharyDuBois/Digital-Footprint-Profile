@@ -10,6 +10,6 @@
 namespace dfp;
 
 
-class Exception extends \Exception{
+class Exception extends \Exception {
     // Left blank on purpose.
 }

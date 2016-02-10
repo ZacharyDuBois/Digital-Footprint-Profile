@@ -55,7 +55,7 @@ class Nav {
      */
     public function navArray() {
         $navItems = array(
-            ''   => 'Home',
+            ''        => 'Home',
             'session' => 'Start',
             'about'   => 'About',
             'terms'   => 'Terms',
@@ -74,9 +74,9 @@ class Nav {
             }
 
             $navArray['nav'][] = array(
-                'title'     => $v,
-                'active'   => $active,
-                'url' => Utility::buildFullLink($this->config, true, $k)
+                'title'  => $v,
+                'active' => $active,
+                'url'    => Utility::buildFullLink($this->config, true, $k)
             );
         }
 

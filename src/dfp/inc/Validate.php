@@ -27,7 +27,8 @@ class Validate {
      */
     public static function sid($sid) {
         $pattern = '/^([[:xdigit:]]{40})$/';
-            return preg_match($pattern, $sid);
+
+        return preg_match($pattern, $sid);
     }
 
     /**

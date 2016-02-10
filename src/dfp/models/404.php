@@ -19,7 +19,7 @@ $view->navArray($nav->navArray());
 // Tell view what template and content.
 $view->tpl('404');
 $view->content(array(
-    'title'       => '404 | Digital Footprint Profile',
+    'title' => '404 | Digital Footprint Profile',
 ));
 
 header("HTTP/1.1 404 Not Found");

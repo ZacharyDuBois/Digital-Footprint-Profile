@@ -22,7 +22,7 @@ $view->navArray($nav->navArray());
 // Tell view what template and content.
 $view->tpl('about');
 $view->content(array(
-    'title'       => 'About | Digital Footprint Profile',
+    'title' => 'About | Digital Footprint Profile',
 ));
 
 echo $view->render();
