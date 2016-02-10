@@ -16,7 +16,7 @@ $config = new Config();
 $session = new Session($config);
 
 // Create Nav
-$nav = new Nav($config);
+$nav = new Nav($config, true);
 $nav->setActive('session');
 
 // Create view.
