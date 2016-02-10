@@ -197,7 +197,7 @@ class Session {
      * @return true
      * @throws Exception
      */
-    public function clearTMP() {
+    private function clearTMP() {
         return $this->set('tmp', '');
     }
 
