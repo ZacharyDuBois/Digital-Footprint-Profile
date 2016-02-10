@@ -52,7 +52,9 @@ class Session {
         if (!array_key_exists('dfp', $this->fileSession)) {
             // Is new session, initialize data.
             $this->initData();
-        } elseif ($this->isExpired()) {
+        }
+
+        if ($this->isExpired()) {
             // Session is expired. End it.
             $this->endSession();
         }
