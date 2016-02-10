@@ -21,7 +21,8 @@ class Session {
     private
         $fileSession,
         $DataStore,
-        $sid;
+        $sid,
+        $config;
 
     /**
      * Session constructor.
@@ -34,13 +35,13 @@ class Session {
         // Determine if a new session or current.
         $this->sid = filter_input(INPUT_COOKIE, DFP_SESSION_NAME);
 
+        $this->config = $config;
+
         // Start the session.
         if (!$this->isSession($this->sid)) {
             $this->sid = $this->newSession();
 
             setcookie(DFP_SESSION_NAME, $this->sid, (time() + DFP_SESSION_LIFE), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'domain'), Utility::httpsBool($config), true);
-
-            unset($config);
         }
 
         // Set variables.
@@ -139,11 +140,13 @@ class Session {
      */
     public function endSession() {
         // Remove the cookie.
-        $config = new Config();
-        setcookie(DFP_SESSION_NAME, $this->sid, (time() - 1), Utility::buildFullLink($config, true, 'session'), $config->get('server', 'domain'), Utility::httpsBool($config), true);
+        setcookie(DFP_SESSION_NAME, $this->sid, (time() - 1), Utility::buildFullLink($this->config, true, 'session'), $config->get('server', 'domain'), Utility::httpsBool($config), true);
 
         // Update file expire.
         $this->fileSession['dfp']['expire'] = time();
+
+        // Clear TMP
+        $this->clearTMP();
 
         if (!$this->DataStore->write($this->fileSession)) {
             throw new Exception("Unable to update session expire time.");
