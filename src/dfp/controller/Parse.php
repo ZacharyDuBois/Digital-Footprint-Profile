@@ -121,11 +121,11 @@ class Parse {
     private function sentiment() {
         $score = $this->insight->score($this->content)['neg'];
 
-        if ($score >= .5) {
+        if ($score >= .75) {
             return 3;
-        } elseif ($score < .5 && $score >= .3) {
+        } elseif ($score < .5 && $score >= .4) {
             return 2;
-        } elseif ($score < .3 && $score > .25) {
+        } elseif ($score < .4 && $score > .2) {
             return 1;
         } else {
             return 0;
