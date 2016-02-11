@@ -20,11 +20,11 @@ if (count($session->get('twitter')) < 0) {
 }
 
 // View
-$nav = new Nav($config, true);
+$nav = new Nav($config);
 $nav->setActive('list');
 $view = new View($config);
 $view->tpl('list');
-$view->navArray($nav->navArray());
+$view->navArray($nav->navArray(true));
 
 
 // Parse

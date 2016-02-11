@@ -16,12 +16,12 @@ $config = new Config();
 $session = new Session($config);
 
 // Create Nav
-$nav = new Nav($config, true);
+$nav = new Nav($config);
 $nav->setActive('session');
 
 // Create view.
 $view = new View($config);
-$view->navArray($nav->navArray());
+$view->navArray($nav->navArray(true));
 $view->tpl('session');
 
 // Twitter
