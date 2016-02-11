@@ -128,7 +128,7 @@ class Twitter {
 
             foreach ($postsRaw as $post => $content) {
                 $posts[] = array(
-                    'url'     => 'https://twitter.com/statuses/' . $content['id'],
+                    'url'     => 'https://twitter.com/' . $this->session->getTMP('twitter_name') . '/status/' . $content['id'],
                     'content' => $content['text'],
                 );
             }
