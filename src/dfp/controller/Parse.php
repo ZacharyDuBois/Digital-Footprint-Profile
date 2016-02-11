@@ -108,7 +108,7 @@ class Parse {
 
             // Use 1 instead of true because preg_* is stupid that way.
             if (count($matches) > 0 && $reg === 1) {
-                $score = $score * count($matches);
+                $score = $score + (count($matches) * $weight);
                 unset($matches);
             }
         }
