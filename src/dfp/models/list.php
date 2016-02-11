@@ -15,7 +15,7 @@ $config = new Config();
 // Session
 $session = new Session($config);
 
-if ($session->get('twitter') === false) {
+if (count($session->get('twitter')) < 0) {
     header('Location: ' . Utility::buildFullLink($config, false, 'session'));
 }
 
