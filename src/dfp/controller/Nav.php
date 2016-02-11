@@ -63,7 +63,7 @@ class Nav {
         );
 
         if ($displayLogout === true) {
-            $navItems['end'] = 'Logout';
+            $navItems['session/end'] = 'Logout';
         }
 
         $navArray = array();
