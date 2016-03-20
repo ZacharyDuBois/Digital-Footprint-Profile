@@ -79,7 +79,8 @@ class Email {
             case 'sendgrid':
                 return $this->sendgrid();
             case 'smtp':
-                return $this->smtp();
+                throw new Exception("SMTP is deprecated.");
+                //return $this->smtp();
             default:
                 throw new Exception("Unknown email gateway.");
         }
@@ -124,6 +125,7 @@ class Email {
      *
      * @return bool
      * @throws \phpmailerException
+     * @deprecated Since the school is not hosting this app anymore, platform decisions are left to me.
      */
     private function smtp() {
         $email = new \PHPMailer();
