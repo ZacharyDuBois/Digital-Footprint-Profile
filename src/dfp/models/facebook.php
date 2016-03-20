@@ -9,15 +9,13 @@
 
 namespace dfp;
 
-$denied = filter_input(INPUT_GET, 'denied');
-
 $config = new Config();
+$session = new Session($config);
 
-if (!isset($denied) || array_key_exists('oauth_verifier', $_GET)) {
-// Create twitter.
-    $twitter = new Twitter($config, new Session($config));
-    $twitter->accessToken();
-    $twitter->getPosts();
-}
+// Create facebook.
+$facebook = new Facebook($config, $session);
+$facebook->accessToken();
+$facebook->getPosts();
+$session->setTMP('allowNext', true);
 
 header('Location: ' . Utility::buildFullLink($config, false, 'session'));
