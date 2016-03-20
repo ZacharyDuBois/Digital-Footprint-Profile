@@ -20,3 +20,4 @@ require APP . 'controller' . DS . 'Email.php';
 require APP . 'controller' . DS . 'Session.php';
 require APP . 'controller' . DS . 'Parse.php';
 require APP . 'controller' . DS . 'Twitter.php';
+require APP . 'controller' . DS . 'Facebook.php';

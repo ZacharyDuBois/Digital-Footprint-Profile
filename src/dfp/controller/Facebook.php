@@ -28,7 +28,7 @@ class Facebook {
     public function __construct(Config $config, Session $session) {
         $this->config = $config;
         $this->session = $session;
-
+        session_start();
         $this->fb = new \Facebook\Facebook(array(
             'app_id'                => $this->config->get('facebook', 'id'),
             'app_secret'            => $this->config->get('facebook', 'secret'),
@@ -106,7 +106,7 @@ class Facebook {
 
     public function getPosts() {
         try {
-            $raw = $this->fb->get('/me/feed?fields=message&limit=3200');
+            $raw = $this->fb->get('/me/feed?fields=message&limit=3200', $this->session->getTMP('facebook_access_token'));
         } catch (FacebookResponseException $e) {
             throw new Exception('Graph returned an error: ' . $e->getMessage());
 

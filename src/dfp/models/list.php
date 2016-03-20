@@ -15,7 +15,7 @@ $config = new Config();
 // Session
 $session = new Session($config);
 
-if ($session->get('allowNext') !== true) {
+if ($session->getTMP('allowNext') !== true) {
     header('Location: ' . Utility::buildFullLink($config, false, 'session'));
 } else {
     // View
