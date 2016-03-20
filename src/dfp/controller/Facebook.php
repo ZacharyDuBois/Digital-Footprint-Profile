@@ -89,7 +89,7 @@ class Facebook {
 
         try {
             // Returns a `Facebook\FacebookResponse` object
-            $response = $this->fb->get('/me?fields=id,name', $accessToken);
+            $response = $this->fb->get('/me?fields=name', $accessToken);
         } catch (FacebookResponseException $e) {
             throw new Exception('Graph returned an error: ' . $e->getMessage());
         } catch (FacebookSDKException $e) {
@@ -105,10 +105,16 @@ class Facebook {
     }
 
     public function getPosts() {
-        //$client = $this->fb->getOAuth2Client();
-        //$client
+        try {
+            $raw = $this->fb->get('/me/feed?fields=message&limit=3200');
+        } catch (FacebookResponseException $e) {
+            throw new Exception('Graph returned an error: ' . $e->getMessage());
 
-        return;
+        } catch (FacebookSDKException $e) {
+            throw new Exception('Facebook SDK returned an error: ' . $e->getMessage());
+        }
+
+        // commit for testing.
     }
 
 }
