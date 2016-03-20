@@ -28,10 +28,10 @@ class Facebook {
     public function __construct(Config $config, Session $session) {
         $this->config = $config;
         $this->session = $session;
-        session_start();
         $this->fb = new \Facebook\Facebook(array(
             'app_id'                => $this->config->get('facebook', 'id'),
             'app_secret'            => $this->config->get('facebook', 'secret'),
+            'persistent_data_handler' => new FacebookPersistentDataHandler($session),
             'default_graph_version' => 'v2.2'
         ));
     }
@@ -114,6 +114,7 @@ class Facebook {
             throw new Exception('Facebook SDK returned an error: ' . $e->getMessage());
         }
 
+        $this->session->set('facebook', array());
         // commit for testing.
     }
 

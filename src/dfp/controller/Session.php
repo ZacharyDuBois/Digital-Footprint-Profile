@@ -169,10 +169,6 @@ class Session {
         // Clear TMP
         $this->clearTMP();
 
-        // Unset PHP's session
-        $_SESSION = array();
-        session_destroy();
-
         if (!$this->DataStore->write($this->fileSession)) {
             throw new Exception("Unable to update session expire time.");
         }
