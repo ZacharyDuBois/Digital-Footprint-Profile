@@ -40,13 +40,30 @@ if ($session->get('twitter') === false) {
     );
 }
 
+// Facebook
+if($session->get('facebook') === false) {
+    $facebook = new Facebook($config, $session);
+    $facebookButton = array(
+        'url'     => $facebook->authorizeURL(),
+        'text'    => 'Login with Facebook',
+        'classes' => ''
+    );
+} else {
+    $facebookButton = array(
+        'url'     => '#',
+        'text'    => 'Facebook: ' . $session->getTMP('facebook_name'),
+        'classes' => 'disabled'
+    );
+}
+
 // Render and return
 $view->content(array(
     'title'        => 'Start | Digital Footprint Profile',
     'listURL'      => Utility::buildFullLink($config, false, 'session/list'),
     'loginButtons' => array(
         $twitterButton,
-        // Others
+        $facebookButton
+        //others
     )
 ));
 
