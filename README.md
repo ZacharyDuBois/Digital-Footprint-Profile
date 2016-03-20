@@ -6,22 +6,21 @@ A tool used to recommend you what to consider deleting from your social media pr
 
 - Twitter
 - Facebook (Sadly people use this)
-- Instagram
 - Tumblr
 
 ### Integrations
 
 - Sendgrid
-- PHPMailer (SMTP)
 - Mustache templates
 
 ### Side Notes
 
-- This was made vuluntarly for my school at request of the PBIS team. Not to
+- This was made voluntarily for my school at request of the PBIS team. Not to
 mention my on going hate for the way people use social media. My school wants
 me to demo this in front of the board of education on 2016-01-06.
 - This provides an option for the user to send an email about what they should
 remove. This feature is hard coded and cannot be removed or turned off easily.
+- This currently does not scan comments due to the API complexity of doing so.
 
 ### Privacy Statement/Acceptable Use
 
@@ -48,7 +47,7 @@ before deploying/using.
 
 TL;DR: Only content the gets flagged by any of the rules is saved.
 Account information is redacted but remains personally identifiable.
-Tokens to access your account are only saved temporarly. This data
+Tokens to access your account are only saved temporarily. This data
 may be exported by the administrator of the application for
 statistical purposes only. Also make sure to edit `/dfp/theme/privacy.mustache`.
 
