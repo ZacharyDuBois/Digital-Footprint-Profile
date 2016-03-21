@@ -29,10 +29,10 @@ class Facebook {
         $this->config = $config;
         $this->session = $session;
         $this->fb = new \Facebook\Facebook(array(
-            'app_id'                => $this->config->get('facebook', 'id'),
-            'app_secret'            => $this->config->get('facebook', 'secret'),
+            'app_id'                  => $this->config->get('facebook', 'id'),
+            'app_secret'              => $this->config->get('facebook', 'secret'),
             'persistent_data_handler' => new FacebookPersistentDataHandler($session),
-            'default_graph_version' => 'v2.2'
+            'default_graph_version'   => 'v2.2'
         ));
     }
 
@@ -46,7 +46,7 @@ class Facebook {
 
         $url = $helper->getLoginUrl(Utility::buildFullLink($this->config, false, 'session/callback/facebook'), $permissions);
 
-        return htmlspecialchars($url);
+        return $url;
     }
 
     public function accessToken() {
@@ -113,9 +113,21 @@ class Facebook {
         } catch (FacebookSDKException $e) {
             throw new Exception('Facebook SDK returned an error: ' . $e->getMessage());
         }
+        $payload = $raw->getDecodedBody();
+        unset($raw);
 
-        $this->session->set('facebook', array());
-        // commit for testing.
+        foreach ($payload['data'] as $post => $details) {
+            $posts[] = array(
+                'url'     => 'https://www.facebook.com/' . $details['id'],
+                'content' => $details['message']
+            );
+        }
+
+        unset($payload);
+
+        $this->session->set('facebook', $posts);
+
+        return true;
     }
 
 }
