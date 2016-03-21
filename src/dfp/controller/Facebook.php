@@ -25,6 +25,14 @@ class Facebook {
         $config,
         $fb;
 
+    /**
+     * Facebook constructor.
+     *
+     * Creates Facebook SDK object and initializes Config and Session objects.
+     *
+     * @param Config $config
+     * @param Session $session
+     */
     public function __construct(Config $config, Session $session) {
         $this->config = $config;
         $this->session = $session;
@@ -36,6 +44,13 @@ class Facebook {
         ));
     }
 
+    /**
+     * Authorize URL
+     *
+     * Generates an authorization URL to start OAuth 2 flow.
+     *
+     * @return string
+     */
     public function authorizeURL() {
         $helper = $this->fb->getRedirectLoginHelper();
         $permissions = array(
@@ -49,6 +64,15 @@ class Facebook {
         return $url;
     }
 
+    /**
+     * Access Token
+     *
+     * Generates an access token to be used in pulling content.
+     *
+     * @return true
+     * @throws Exception
+     * @throws FacebookSDKException
+     */
     public function accessToken() {
         $helper = $this->fb->getRedirectLoginHelper();
 
@@ -104,6 +128,14 @@ class Facebook {
         return true;
     }
 
+    /**
+     * Get Posts
+     *
+     * Gets post content and puts it into the session storage for later use.
+     *
+     * @return bool
+     * @throws Exception
+     */
     public function getPosts() {
         try {
             $raw = $this->fb->get('/me/feed?fields=message,id&limit=3200', $this->session->getTMP('facebook_access_token'));

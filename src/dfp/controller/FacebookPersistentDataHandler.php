@@ -15,7 +15,7 @@ use \Facebook\PersistentData\PersistentDataInterface;
 /**
  * Class FacebookPersistentDataHandler
  *
- * Impliments use of DFP session handler for Facebook PHP SDK.
+ * Implements use of DFP session handler for Facebook PHP SDK.
  *
  * @package dfp
  */
