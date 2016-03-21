@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "0.0.1",
-    "lastWrite": 1452068373
+    "lastWrite": 0
   },
   "payload": {
     "anal": 9,
@@ -50,6 +50,7 @@
     "kill yourself": 10,
     "damnit": 2,
     "fucking": 7,
+    "fucken": 7,
     "asshole": 6,
     "sexy": 6,
     "booty": 4
