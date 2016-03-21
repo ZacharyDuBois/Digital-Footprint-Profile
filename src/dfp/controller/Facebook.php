@@ -32,7 +32,7 @@ class Facebook {
             'app_id'                  => $this->config->get('facebook', 'id'),
             'app_secret'              => $this->config->get('facebook', 'secret'),
             'persistent_data_handler' => new FacebookPersistentDataHandler($session),
-            'default_graph_version'   => 'v2.2'
+            'default_graph_version'   => 'v2.5'
         ));
     }
 
