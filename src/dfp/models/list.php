@@ -35,7 +35,8 @@ if ($session->getTMP('allowNext') !== true) {
     $flagged = 0;
 
     foreach ($session->get('posts') as $post) {
-        $parse->parse($post['content']);
+        $content = preg_replace('/(\\n)/', ' ', $post['content']);
+        $parse->parse($content);
         $score = $parse->score();
         $tags = $parse->tags();
 
@@ -44,7 +45,7 @@ if ($session->getTMP('allowNext') !== true) {
                 'url'     => $post['url'],
                 'score'   => $score,
                 'tags'    => $tags,
-                'content' => $post['content']
+                'content' => $content
             );
 
             $flagged++;
