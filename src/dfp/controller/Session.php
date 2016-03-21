@@ -185,8 +185,14 @@ class Session {
      * @return string|array|int|false
      */
     public function getTMP($key) {
-        if (array_key_exists($key, $this->get('tmp'))) {
-            return $this->get('tmp')[$key];
+        $payload = $this->get('tmp');
+
+        if ($payload === false) {
+            $payload = array();
+        }
+
+        if (array_key_exists($key, $payload)) {
+            return $payload[$key];
         }
 
         return false;
@@ -269,6 +275,11 @@ class Session {
      */
     public function addPosts($new) {
         $cur = $this->get('posts');
+
+        if ($cur === false) {
+            $cur = array();
+        }
+
         $merged = array_merge($cur, $new);
         $this->set('posts', $merged);
 
