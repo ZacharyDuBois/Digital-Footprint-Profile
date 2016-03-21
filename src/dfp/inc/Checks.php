@@ -1,6 +1,6 @@
 <?php
 /**
- * File: checks.php
+ * File: Checks.php
  * User: zacharydubois
  * Date: 2016-01-04
  * Time: 22:04

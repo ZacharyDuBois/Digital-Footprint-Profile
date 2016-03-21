@@ -32,7 +32,7 @@ p("Welcome to Digital Footprint Profile " . VERSION . " configurator.");
 p("Made by Zachary J. DuBois - https://zacharydubois.me");
 p("Checking dependencies...");
 
-require APP . 'inc' . DS . 'checks.php';
+require APP . 'inc' . DS . 'Checks.php';
 
 if (phpVersionCheck()) {
     p("PHP " . PHP_VERSION . " meets requirement...");

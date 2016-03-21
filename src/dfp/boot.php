@@ -7,7 +7,7 @@
  * Project: Digital-Footprint-Profile
  */
 
-require APP . 'inc' . DS . 'checks.php';
+require APP . 'inc' . DS . 'Checks.php';
 
 if (!phpVersionCheck()) {
     header("Content-Type: text/plain");
