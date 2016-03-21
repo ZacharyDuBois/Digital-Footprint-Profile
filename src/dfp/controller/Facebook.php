@@ -106,7 +106,7 @@ class Facebook {
 
     public function getPosts() {
         try {
-            $raw = $this->fb->get('/me/feed?fields=message&limit=3200', $this->session->getTMP('facebook_access_token'));
+            $raw = $this->fb->get('/me/feed?fields=message,id&limit=3200', $this->session->getTMP('facebook_access_token'));
         } catch (FacebookResponseException $e) {
             throw new Exception('Graph returned an error: ' . $e->getMessage());
 
@@ -116,11 +116,14 @@ class Facebook {
         $payload = $raw->getDecodedBody();
         unset($raw);
 
+        $posts = array();
         foreach ($payload['data'] as $post => $details) {
-            $posts[] = array(
-                'url'     => 'https://www.facebook.com/' . $details['id'],
-                'content' => $details['message']
-            );
+            if (array_key_exists('message', $details)) {
+                $posts[] = array(
+                    'url'     => 'https://www.facebook.com/' . $details['id'],
+                    'content' => $details['message']
+                );
+            }
         }
 
         unset($payload);
