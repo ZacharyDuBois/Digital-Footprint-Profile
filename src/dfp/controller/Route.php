@@ -70,6 +70,11 @@ class Route {
             $endpointArray[2] = explode('?', $endpointArray[2])[0];
         }
 
+        $pieces = count($endpointArray);
+        if ($endpointArray[($pieces - 1)] === '') {
+            unset($endpointArray[($pieces - 1)]);
+        }
+
         switch ($endpointArray[0]) {
             // Basically returns top level pages.
             case '':
