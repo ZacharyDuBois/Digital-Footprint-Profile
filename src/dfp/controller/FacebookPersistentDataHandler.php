@@ -35,13 +35,13 @@ class FacebookPersistentDataHandler implements PersistentDataInterface {
      * @inheritdoc
      */
     public function get($key) {
-        return $this->session->getTMP($key);
+        return $this->session->getTMP('fbsdk_' . $key);
     }
 
     /**
      * @inheritdoc
      */
     public function set($key, $value) {
-        $this->session->setTMP($key, $value);
+        $this->session->setTMP('fbsdk_' . $key, $value);
     }
 }

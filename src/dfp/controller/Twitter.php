@@ -134,6 +134,8 @@ class Twitter {
             }
         }
 
+        unset($postsRaw);
+
         $this->session->set('twitter', $posts);
 
         return true;
