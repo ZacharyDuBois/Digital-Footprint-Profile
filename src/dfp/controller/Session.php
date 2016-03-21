@@ -257,4 +257,25 @@ class Session {
 
         return true;
     }
+
+    /**
+     * Add Posts
+     *
+     * Adds posts to the current array of posts pulled from social networks.
+     *
+     * @param $new
+     * @return true
+     * @throws Exception
+     */
+    public function addPosts($new) {
+        $cur = $this->get('posts');
+        $merged = array_merge($cur, $new);
+        $this->set('posts', $merged);
+
+        unset($cur);
+        unset($new);
+        unset($merged);
+
+        return true;
+    }
 }

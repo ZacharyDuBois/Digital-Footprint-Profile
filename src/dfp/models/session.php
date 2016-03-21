@@ -25,7 +25,7 @@ $view->navArray($nav->navArray(true));
 $view->tpl('session');
 
 // Twitter
-if ($session->get('twitter') === false) {
+if ($session->getTMP('twitter_name') === false) {
     $twitter = new Twitter($config, $session);
     $twitterButton = array(
         'url'     => $twitter->authorizeURL(),
@@ -41,7 +41,7 @@ if ($session->get('twitter') === false) {
 }
 
 // Facebook
-if($session->get('facebook') === false) {
+if($session->getTMP('facebook_name') === false) {
     $facebook = new Facebook($config, $session);
     $facebookButton = array(
         'url'     => $facebook->authorizeURL(),

@@ -125,7 +125,7 @@ class Facebook {
 
         unset($payload);
 
-        $this->session->set('facebook', $posts);
+        $this->session->addPosts($posts);
 
         return true;
     }

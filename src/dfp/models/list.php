@@ -34,7 +34,7 @@ if ($session->getTMP('allowNext') !== true) {
     $total = 0;
     $flagged = 0;
 
-    foreach ($session->get('twitter') as $post) {
+    foreach ($session->get('posts') as $post) {
         $parse->parse($post['content']);
         $score = $parse->score();
         $tags = $parse->tags();
