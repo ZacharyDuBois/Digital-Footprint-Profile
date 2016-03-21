@@ -155,12 +155,6 @@ $cfgArray['tumblr']['consumer'] = r();
 p("Tumblr consumer secret:");
 $cfgArray['tumblr']['secret'] = r();
 
-p("Instagram client id:");
-$cfgArray['instagram']['id'] = r();
-
-p("Instagram client secret:");
-$cfgArray['instagram']['secret'] = r();
-
 p(false);
 p("Custom Settings");
 
