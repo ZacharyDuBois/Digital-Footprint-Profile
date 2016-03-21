@@ -100,16 +100,11 @@ class Parse {
     private function keywords() {
         $score = 0;
 
+        $breakdown = array_count_values(str_word_count($this->content, 1));
+
         foreach ($this->keywords as $keyword => $weight) {
-            $reg = preg_match_all('/(^' . $keyword . '[\ \.\!\?\,]|[\ \-]' . $keyword . '$|[\ \-]' . $keyword . '[\ \.\!\?\,])/i', $this->content, $matches);
-
-            // Useless because it does not actually indicate the matches.
-            unset($matches[0]);
-
-            // Use 1 instead of true because preg_* is stupid that way.
-            if (count($matches) > 0 && $reg === 1) {
-                $score = $score + (count($matches) * $weight);
-                unset($matches);
+            if (array_key_exists($keyword, $breakdown)) {
+                $score = $score + ($breakdown[$keyword] * $weight);
             }
         }
 
