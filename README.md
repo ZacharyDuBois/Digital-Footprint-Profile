@@ -2,22 +2,41 @@
 
 A tool used to recommend you what to consider deleting from your social media profiles.
 
-### Planned support
+### Supported Networks
 
-- Twitter
-- Facebook (Sadly people use this)
-- Tumblr
+- Twitter (Tweets)
+- Facebook (Text only posts) (Sadly people use this)
+
+### Planned Network Support
+
+- Tumblr (Posts)
+- Twitter (DMs, likes)
+- Facebook (Messages, Shares, Likes, All posts)
 
 ### Integrations
 
 - Sendgrid
 - Mustache templates
 
+### Scoring
+
+- Keywords
+- Sentiment dictionary classification (Thanks to [jwhennessey/phpinsight](https://github.com/jwhennessey/phpinsight))
+
+### Demo
+
+You can use my publicly available instance [here](https://dfp.zacharydubois.moe).
+
+![DFP-Demo-1.png](https://raw.githubusercontent.com/ZacharyDuBois/Digital-Footprint-Profile/master/Images/DFP-Demo-1.png)
+![DFP-Demo-2.png](https://raw.githubusercontent.com/ZacharyDuBois/Digital-Footprint-Profile/master/Images/DFP-Demo-2.png)
+![DFP-Demo-3.png](https://raw.githubusercontent.com/ZacharyDuBois/Digital-Footprint-Profile/master/Images/DFP-Demo-3.png)
+![DFP-Demo-4.png](https://raw.githubusercontent.com/ZacharyDuBois/Digital-Footprint-Profile/master/Images/DFP-Demo-4.png)
+
 ### Side Notes
 
 - This was made voluntarily for my school at request of the PBIS team. Not to
-mention my on going hate for the way people use social media. My school wants
-me to demo this in front of the board of education on 2016-01-06.
+mention my on going hate for the way people use social media.
+- I demoed this in front of the board of education on 2016-01-06.
 - This provides an option for the user to send an email about what they should
 remove. This feature is hard coded and cannot be removed or turned off easily.
 - This currently does not scan comments due to the API complexity of doing so.
