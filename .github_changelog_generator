@@ -1,0 +1,6 @@
+user=ZacharyDuBois
+project=Digital-Footprint-Profile
+include-labels="bug,enhancement,incorrect scoring,security"
+exclude-labels="duplicate,question,invalid,wontfix"
+bug-labels="bug,security"
+enhancement-labels="incorrect scoring,enhancement"
