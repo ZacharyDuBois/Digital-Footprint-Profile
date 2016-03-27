@@ -1,5 +1,7 @@
 # Digital Footprint Profile
 
+*v1.0.0*
+
 A tool used to recommend you what to consider deleting from your social media profiles.
 
 ### Supported Networks

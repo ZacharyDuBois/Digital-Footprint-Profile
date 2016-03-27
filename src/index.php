@@ -7,7 +7,7 @@
  * Project: Digital-Footprint-Profile
  */
 
-define('VERSION', '0.0.1');
+define('VERSION', '1.0.0');
 define('DS', DIRECTORY_SEPARATOR);
 define('PATH', dirname(__FILE__) . DS);
 define('APP', PATH . 'dfp' . DS);
